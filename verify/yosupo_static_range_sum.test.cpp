@@ -10,7 +10,7 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
-  if (!(cin >> n >> q)) return 0;
+  cin >> n >> q;
   vector<ll> a(n);
   for (int i = 0; i < n; i++) cin >> a[i];
   segtree<ll, op, e> seg(a);

@@ -45,23 +45,23 @@ data:
     \      sm = op(d[r], sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\
     };\n#line 3 \"verify/yosupo_static_range_sum.test.cpp\"\n\nusing ll = long long;\n\
     \nll op(ll a, ll b) { return a + b; }\nll e() { return 0; }\n\nint main() {\n\
-    \  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n, q;\n  if (!(cin\
-    \ >> n >> q)) return 0;\n  vector<ll> a(n);\n  for (int i = 0; i < n; i++) cin\
-    \ >> a[i];\n  segtree<ll, op, e> seg(a);\n  while (q--) {\n    int l, r;\n   \
-    \ cin >> l >> r;\n    cout << seg.prod(l, r) << '\\n';\n  }\n  return 0;\n}\n"
+    \  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n, q;\n  cin >> n\
+    \ >> q;\n  vector<ll> a(n);\n  for (int i = 0; i < n; i++) cin >> a[i];\n  segtree<ll,\
+    \ op, e> seg(a);\n  while (q--) {\n    int l, r;\n    cin >> l >> r;\n    cout\
+    \ << seg.prod(l, r) << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_sum\"\n#include\
     \ \"structure/segtree.hpp\"\n\nusing ll = long long;\n\nll op(ll a, ll b) { return\
     \ a + b; }\nll e() { return 0; }\n\nint main() {\n  ios::sync_with_stdio(false);\n\
-    \  cin.tie(nullptr);\n  int n, q;\n  if (!(cin >> n >> q)) return 0;\n  vector<ll>\
-    \ a(n);\n  for (int i = 0; i < n; i++) cin >> a[i];\n  segtree<ll, op, e> seg(a);\n\
-    \  while (q--) {\n    int l, r;\n    cin >> l >> r;\n    cout << seg.prod(l, r)\
-    \ << '\\n';\n  }\n  return 0;\n}\n"
+    \  cin.tie(nullptr);\n  int n, q;\n  cin >> n >> q;\n  vector<ll> a(n);\n  for\
+    \ (int i = 0; i < n; i++) cin >> a[i];\n  segtree<ll, op, e> seg(a);\n  while\
+    \ (q--) {\n    int l, r;\n    cin >> l >> r;\n    cout << seg.prod(l, r) << '\\\
+    n';\n  }\n  return 0;\n}\n"
   dependsOn:
   - structure/segtree.hpp
   isVerificationFile: true
   path: verify/yosupo_static_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 05:17:14+09:00'
+  timestamp: '2026-03-11 05:19:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_static_range_sum.test.cpp
