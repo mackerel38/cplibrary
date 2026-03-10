@@ -41,7 +41,7 @@ Config rules (日本語):
   title: [タイトル]
   documentation_of: [ライブラリのパス(例: //structure/segtree.hpp)]
   ---
-- docs/<category>/<name>.md にドキュメントを作成すること。
+- config/<category>/<name>.md にドキュメントを作成すること。
 - 各ドキュメントは必ず先頭に "Definition"（操作の定義）と "Complexity"（計算量：Big-O）を書くこと。
 - ドキュメント本文は日本語で書くこと。
 
