@@ -63,16 +63,6 @@ for p in dst.rglob("*.md"):
         p.write_text(text2)
 PY
   fi
-  # force all library icons to heavy_check_mark
-  if [ -f "$DST_DIR/index.md" ]; then
-    python3 - << 'PY'
-from pathlib import Path
-p = Path("docs/index.md")
-text = p.read_text()
-text = text.replace("icon: ':warning:'", "icon: ':heavy_check_mark:'")
-p.write_text(text)
-PY
-  fi
 else
   echo "[verify_push] no generated docs at $SRC_DIR; skipping copy."
 fi
