@@ -21,6 +21,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/unionfind.hpp
       title: Union-Find
+    - icon: ':heavy_check_mark:'
+      path: structure/weightedunionfind.hpp
+      title: "\u91CD\u307F\u4ED8\u304D Union-Find"
   verificationCategories:
   - name: verify
     pages:
@@ -45,5 +48,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_unionfind.test.cpp
       title: verify/yosupo_unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_unionfind_with_potential.test.cpp
+      title: verify/yosupo_unionfind_with_potential.test.cpp
 layout: toppage
 ---
