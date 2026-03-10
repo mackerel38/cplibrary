@@ -1,6 +1,6 @@
 ---
 title: ハッシュマップ
-documentation_of: structure/hashmap.hpp
+documentation_of: //structure/hashmap.hpp
 ---
 
 Definition
