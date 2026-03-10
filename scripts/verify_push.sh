@@ -23,16 +23,15 @@ echo "[verify_push] running oj-verify run..."
 oj-verify run
 
 echo "[verify_push] running oj-verify docs..."
-# prevent recursive docs nesting
-rm -rf .verify-helper/markdown/docs docs/docs
 oj-verify docs
 
-# copy generated markdown from .verify-helper/markdown/docs into docs/
-SRC_DIR=".verify-helper/markdown/docs"
+# copy generated site from .verify-helper/markdown into docs/
+SRC_DIR=".verify-helper/markdown"
 DST_DIR="docs"
 
 if [ -d "$SRC_DIR" ]; then
-  echo "[verify_push] copying generated docs from $SRC_DIR to $DST_DIR..."
+  echo "[verify_push] copying generated site from $SRC_DIR to $DST_DIR..."
+  rm -rf "$DST_DIR"
   mkdir -p "$DST_DIR"
   # use rsync if available for safe merge; fallback to cp
   if command -v rsync >/dev/null 2>&1; then
