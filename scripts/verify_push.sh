@@ -23,6 +23,8 @@ echo "[verify_push] running oj-verify run..."
 oj-verify run
 
 echo "[verify_push] running oj-verify docs..."
+# remove old generated site to avoid it being scanned as source docs
+rm -rf docs
 oj-verify docs
 
 # copy generated site from .verify-helper/markdown into docs/
