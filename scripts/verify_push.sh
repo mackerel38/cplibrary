@@ -41,6 +41,8 @@ if [ -d "$SRC_DIR" ]; then
     # safer: copy recursively, overwrite existing
     cp -r "$SRC_DIR"/* "$DST_DIR"/ 2>/dev/null || true
   fi
+  # remove nested docs/ to avoid docs/docs on GitHub Pages
+  rm -rf "$DST_DIR/docs"
 else
   echo "[verify_push] no generated docs at $SRC_DIR; skipping copy."
 fi
