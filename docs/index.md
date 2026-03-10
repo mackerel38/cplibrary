@@ -6,7 +6,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/BIT.hpp
       title: Binary Indexed Tree
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: structure/segtree.hpp
       title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   verificationCategories:
