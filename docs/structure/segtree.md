@@ -1,6 +1,5 @@
 Definition
 区間演算のセグメント木。
-max_right と min_left で条件を満たす最大の右端または最小の左端を検索できる。
 
 Complexity
 初期化: O(n)

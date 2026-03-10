@@ -25,8 +25,8 @@ oj-verify run
 echo "[verify_push] running oj-verify docs..."
 oj-verify docs
 
-# copy generated markdown from .verify-helper/markdown into docs/
-SRC_DIR=".verify-helper/markdown"
+# copy generated markdown from .verify-helper/markdown/docs into docs/
+SRC_DIR=".verify-helper/markdown/docs"
 DST_DIR="docs"
 
 if [ -d "$SRC_DIR" ]; then
