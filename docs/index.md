@@ -5,7 +5,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: structure/BIT.hpp
-      title: structure/BIT.hpp
+      title: "Fenwick\u6728"
   verificationCategories:
   - name: verify
     pages:
