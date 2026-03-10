@@ -46,11 +46,11 @@ data:
   - verify/yosupo_point_add_range_sum_2.test.cpp
 documentation_of: //structure/BIT.hpp
 layout: document
-title: "Fenwick\u6728"
+title: Binary Indexed Tree
 ---
 
 Definition
-BIT（Fenwick木）。
+BIT（Binary Indexed Tree）。
 
 Complexity
 加算: O(log N)

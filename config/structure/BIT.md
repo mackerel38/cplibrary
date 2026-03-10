@@ -1,10 +1,10 @@
 ---
-title: Fenwick木
+title: Binary Indexed Tree
 documentation_of: //structure/BIT.hpp
 ---
 
 Definition
-BIT（Fenwick木）。
+BIT（Binary Indexed Tree）。
 
 Complexity
 加算: O(log N)
