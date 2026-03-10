@@ -49,4 +49,50 @@ struct segtree {
   }
 
   S all_prod() const { return d[1]; }
+
+  template <class F>
+  int max_right(int l, F f) const {
+    if (l == n) return n;
+    S sm = e();
+    int i = l + size;
+    do {
+      while ((i & 1) == 0) i >>= 1;
+      if (!f(op(sm, d[i]))) {
+        while (i < size) {
+          i <<= 1;
+          if (f(op(sm, d[i]))) {
+            sm = op(sm, d[i]);
+            i++;
+          }
+        }
+        return i - size;
+      }
+      sm = op(sm, d[i]);
+      i++;
+    } while ((i & -i) != i);
+    return n;
+  }
+
+  template <class F>
+  int min_left(int r, F f) const {
+    if (r == 0) return 0;
+    S sm = e();
+    int i = r + size;
+    do {
+      i--;
+      while (i > 1 && (i & 1)) i >>= 1;
+      if (!f(op(d[i], sm))) {
+        while (i < size) {
+          i = i * 2 + 1;
+          if (f(op(d[i], sm))) {
+            sm = op(d[i], sm);
+            i--;
+          }
+        }
+        return i + 1 - size;
+      }
+      sm = op(d[i], sm);
+    } while ((i & -i) != i);
+    return 0;
+  }
 };
