@@ -23,6 +23,8 @@ echo "[verify_push] running oj-verify run..."
 oj-verify run
 
 echo "[verify_push] running oj-verify docs..."
+# prevent recursive docs nesting
+rm -rf .verify-helper/markdown/docs docs/docs
 oj-verify docs
 
 # copy generated markdown from .verify-helper/markdown/docs into docs/
