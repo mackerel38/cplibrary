@@ -7,6 +7,9 @@ data:
       path: structure/BIT.hpp
       title: Binary Indexed Tree
     - icon: ':heavy_check_mark:'
+      path: structure/bipq.hpp
+      title: "\u4E21\u7AEF\u512A\u5148\u5EA6\u4ED8\u304D\u30AD\u30E5\u30FC"
+    - icon: ':heavy_check_mark:'
       path: structure/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
     - icon: ':heavy_check_mark:'
@@ -21,6 +24,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_associative_array.test.cpp
       title: verify/yosupo_associative_array.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_double_ended_priority_queue.test.cpp
+      title: verify/yosupo_double_ended_priority_queue.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_ordered_set.test.cpp
       title: verify/yosupo_ordered_set.test.cpp
