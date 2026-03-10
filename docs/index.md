@@ -5,10 +5,10 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: structure/BIT.hpp
-      title: "Fenwick\u6728"
+      title: structure/BIT.hpp
     - icon: ':heavy_check_mark:'
       path: structure/segtree.hpp
-      title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+      title: structure/segtree.hpp
   verificationCategories:
   - name: verify
     pages:
