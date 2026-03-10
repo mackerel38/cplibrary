@@ -1,6 +1,6 @@
 ---
 title: Treap
-documentation_of: structure/treap.hpp
+documentation_of: //structure/treap.hpp
 ---
 
 Definition
