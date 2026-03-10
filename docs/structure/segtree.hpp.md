@@ -75,7 +75,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_point_add_range_sum.test.cpp
-documentation_of: structure/segtree.hpp
+documentation_of: //structure/segtree.hpp
 layout: document
 redirect_from:
 - /library/structure/segtree.hpp

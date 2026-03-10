@@ -33,7 +33,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_point_add_range_sum_2.test.cpp
-documentation_of: structure/BIT.hpp
+documentation_of: //structure/BIT.hpp
 layout: document
 redirect_from:
 - /library/structure/BIT.hpp

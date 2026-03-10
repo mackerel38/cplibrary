@@ -32,7 +32,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_point_add_range_sum.test.cpp
-documentation_of: structure/fenwick.hpp
+documentation_of: //structure/fenwick.hpp
 layout: document
 redirect_from:
 - /library/structure/fenwick.hpp

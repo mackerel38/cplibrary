@@ -44,7 +44,7 @@ data:
   timestamp: '2026-03-11 01:32:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/structure/fenwick.test.cpp
+documentation_of: //verify/structure/fenwick.test.cpp
 layout: document
 redirect_from:
 - /verify/verify/structure/fenwick.test.cpp

@@ -48,7 +48,7 @@ Config rules (日本語):
 Docs front-matter 例（必須）:
 ---
 title: セグメント木
-documentation_of: structure/segtree.hpp
+documentation_of: //structure/segtree.hpp
 ---
 
 Commit & push conventions:

@@ -58,7 +58,7 @@ data:
   timestamp: '2026-03-11 02:12:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/yosupo_static_range_sum.test.cpp
+documentation_of: //verify/yosupo_static_range_sum.test.cpp
 layout: document
 redirect_from:
 - /verify/verify/yosupo_static_range_sum.test.cpp

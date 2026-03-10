@@ -47,7 +47,7 @@ data:
   timestamp: '2026-03-11 03:20:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/yosupo_point_add_range_sum_2.test.cpp
+documentation_of: //verify/yosupo_point_add_range_sum_2.test.cpp
 layout: document
 redirect_from:
 - /verify/verify/yosupo_point_add_range_sum_2.test.cpp

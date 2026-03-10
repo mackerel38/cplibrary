@@ -43,6 +43,24 @@ if [ -d "$SRC_DIR" ]; then
   fi
   # remove nested docs/ to avoid docs/docs on GitHub Pages
   rm -rf "$DST_DIR/docs"
+  # fix documentation_of paths to be repo-root absolute
+  if command -v python3 >/dev/null 2>&1; then
+    DOC_DST="$DST_DIR" python3 - << 'PY'
+import os, pathlib, re
+
+dst = pathlib.Path(os.environ["DOC_DST"])
+for p in dst.rglob("*.md"):
+    text = p.read_text()
+    def repl(m):
+        v = m.group(1)
+        if v.startswith("//"):
+            return m.group(0)
+        return "documentation_of: //" + v
+    text2 = re.sub(r"^documentation_of: (.+)$", repl, text, flags=re.M)
+    if text2 != text:
+        p.write_text(text2)
+PY
+  fi
 else
   echo "[verify_push] no generated docs at $SRC_DIR; skipping copy."
 fi
