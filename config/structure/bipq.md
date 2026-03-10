@@ -1,6 +1,6 @@
 ---
 title: 両端優先度付きキュー
-documentation_of: structure/bipq.hpp
+documentation_of: //structure/bipq.hpp
 ---
 
 Definition

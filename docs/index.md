@@ -18,6 +18,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/treap.hpp
       title: Treap
+    - icon: ':heavy_check_mark:'
+      path: structure/unionfind.hpp
+      title: Union-Find
   verificationCategories:
   - name: verify
     pages:
@@ -39,5 +42,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_static_range_sum.test.cpp
       title: verify/yosupo_static_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_unionfind.test.cpp
+      title: verify/yosupo_unionfind.test.cpp
 layout: toppage
 ---
