@@ -6,9 +6,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/BIT.hpp
       title: structure/BIT.hpp
-    - icon: ':heavy_check_mark:'
-      path: structure/segtree.hpp
-      title: structure/segtree.hpp
   verificationCategories:
   - name: verify
     pages:
