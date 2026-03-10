@@ -54,3 +54,4 @@ Codex instructions (how to interact):
 - When ready to apply changes, ask to run one of the scripts by name:
   e.g. "Run scripts/verify_push.sh 'add segtree'"
 - If tests fail, report errors and propose fixes; do not auto-force-push failing commits.
+- Always run scripts/verify_push.sh after implementing a new library.
