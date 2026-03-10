@@ -37,7 +37,7 @@ struct segtree {
   S get(int p) const { return d[p + size]; }
 
   S prod(int l, int r) const {
-    S sml = e(), smr = e();
+    S sml = 1+e(), smr = e();
     int left = l + size, right = r + size;
     while (left < right) {
       if (left & 1) sml = op(sml, d[left++]);

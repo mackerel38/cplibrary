@@ -8,7 +8,7 @@ ll e() { return 0; }
 
 int main() {
   ios::sync_with_stdio(false);
- a cin.tie(nullptr);
+ cin.tie(nullptr);
 
   int n, q;
   if (!(cin >> n >> q)) return 0;
