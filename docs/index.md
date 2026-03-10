@@ -12,6 +12,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/segtree.hpp
       title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':heavy_check_mark:'
+      path: structure/treap.hpp
+      title: Treap
   verificationCategories:
   - name: verify
     pages:
@@ -21,6 +24,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_point_add_range_sum.test.cpp
       title: verify/yosupo_point_add_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_predecessor_problem.test.cpp
+      title: verify/yosupo_predecessor_problem.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_static_range_sum.test.cpp
       title: verify/yosupo_static_range_sum.test.cpp
