@@ -11,11 +11,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
+    PROBLEM: https://judge.yosupo.jp/problem/ordered_set
     links:
-    - https://judge.yosupo.jp/problem/predecessor_problem
-  bundledCode: "#line 1 \"verify/yosupo_predecessor_problem.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/predecessor_problem\"\n#line 2 \"structure/treap.hpp\"\
+    - https://judge.yosupo.jp/problem/ordered_set
+  bundledCode: "#line 1 \"verify/yosupo_ordered_set.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/ordered_set\"\n#line 2 \"structure/treap.hpp\"\
     \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <class T, class Cmp\
     \ = less<T>>\nstruct treap {\n  struct node {\n    T key;\n    uint32_t pr;\n\
     \    int sz;\n    node* l;\n    node* r;\n    node(const T& k, uint32_t p) : key(k),\
@@ -74,41 +74,45 @@ data:
     \  bool ok = false;\n    T best;\n    while (t) {\n      if (!cmp(key, t->key))\
     \ {\n        ok = true;\n        best = t->key;\n        t = t->r;\n      } else\
     \ {\n        t = t->l;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n};\n#line 3 \"verify/yosupo_predecessor_problem.test.cpp\"\n\nint main()\
-    \ {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\n  int N, Q;\n  cin\
-    \ >> N >> Q;\n  string T;\n  cin >> T;\n\n  treap<int> tr;\n  for (int i = 0;\
-    \ i < N; i++) {\n    if (T[i] == '1') tr.insert(i);\n  }\n\n  for (int i = 0;\
-    \ i < Q; i++) {\n    int c, k;\n    cin >> c >> k;\n    if (c == 0) {\n      tr.insert(k);\n\
-    \    } else if (c == 1) {\n      tr.erase(k);\n    } else if (c == 2) {\n    \
-    \  cout << (tr.contains(k) ? 1 : 0) << '\\n';\n    } else if (c == 3) {\n    \
-    \  int v;\n      if (tr.lower_bound(k, v))\n        cout << v << '\\n';\n    \
-    \  else\n        cout << -1 << '\\n';\n    } else if (c == 4) {\n      int v;\n\
-    \      if (tr.prev_eq(k, v))\n        cout << v << '\\n';\n      else\n      \
-    \  cout << -1 << '\\n';\n    }\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n\
-    #include \"structure/treap.hpp\"\n\nint main() {\n  ios::sync_with_stdio(false);\n\
-    \  cin.tie(nullptr);\n\n  int N, Q;\n  cin >> N >> Q;\n  string T;\n  cin >> T;\n\
-    \n  treap<int> tr;\n  for (int i = 0; i < N; i++) {\n    if (T[i] == '1') tr.insert(i);\n\
-    \  }\n\n  for (int i = 0; i < Q; i++) {\n    int c, k;\n    cin >> c >> k;\n \
-    \   if (c == 0) {\n      tr.insert(k);\n    } else if (c == 1) {\n      tr.erase(k);\n\
-    \    } else if (c == 2) {\n      cout << (tr.contains(k) ? 1 : 0) << '\\n';\n\
-    \    } else if (c == 3) {\n      int v;\n      if (tr.lower_bound(k, v))\n   \
-    \     cout << v << '\\n';\n      else\n        cout << -1 << '\\n';\n    } else\
-    \ if (c == 4) {\n      int v;\n      if (tr.prev_eq(k, v))\n        cout << v\
+    \  }\n};\n#line 3 \"verify/yosupo_ordered_set.test.cpp\"\n\nint main() {\n  ios::sync_with_stdio(false);\n\
+    \  cin.tie(nullptr);\n\n  int N, Q;\n  cin >> N >> Q;\n  treap<long long> tr;\n\
+    \  for (int i = 0; i < N; i++) {\n    long long a;\n    cin >> a;\n    tr.insert(a);\n\
+    \  }\n\n  for (int i = 0; i < Q; i++) {\n    int t;\n    long long x;\n    cin\
+    \ >> t >> x;\n    if (t == 0) {\n      tr.insert(x);\n    } else if (t == 1) {\n\
+    \      tr.erase(x);\n    } else if (t == 2) {\n      long long v;\n      if (tr.kth((int)(x\
+    \ - 1), v))\n        cout << v << '\\n';\n      else\n        cout << -1 << '\\\
+    n';\n    } else if (t == 3) {\n      cout << tr.count_le(x) << '\\n';\n    } else\
+    \ if (t == 4) {\n      long long v;\n      if (tr.prev_eq(x, v))\n        cout\
+    \ << v << '\\n';\n      else\n        cout << -1 << '\\n';\n    } else if (t ==\
+    \ 5) {\n      long long v;\n      if (tr.lower_bound(x, v))\n        cout << v\
+    \ << '\\n';\n      else\n        cout << -1 << '\\n';\n    }\n  }\n  return 0;\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/ordered_set\"\n#include\
+    \ \"structure/treap.hpp\"\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\
+    \n  int N, Q;\n  cin >> N >> Q;\n  treap<long long> tr;\n  for (int i = 0; i <\
+    \ N; i++) {\n    long long a;\n    cin >> a;\n    tr.insert(a);\n  }\n\n  for\
+    \ (int i = 0; i < Q; i++) {\n    int t;\n    long long x;\n    cin >> t >> x;\n\
+    \    if (t == 0) {\n      tr.insert(x);\n    } else if (t == 1) {\n      tr.erase(x);\n\
+    \    } else if (t == 2) {\n      long long v;\n      if (tr.kth((int)(x - 1),\
+    \ v))\n        cout << v << '\\n';\n      else\n        cout << -1 << '\\n';\n\
+    \    } else if (t == 3) {\n      cout << tr.count_le(x) << '\\n';\n    } else\
+    \ if (t == 4) {\n      long long v;\n      if (tr.prev_eq(x, v))\n        cout\
+    \ << v << '\\n';\n      else\n        cout << -1 << '\\n';\n    } else if (t ==\
+    \ 5) {\n      long long v;\n      if (tr.lower_bound(x, v))\n        cout << v\
     \ << '\\n';\n      else\n        cout << -1 << '\\n';\n    }\n  }\n  return 0;\n\
     }\n"
   dependsOn:
   - structure/treap.hpp
   isVerificationFile: true
-  path: verify/yosupo_predecessor_problem.test.cpp
+  path: verify/yosupo_ordered_set.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 05:43:28+09:00'
+  timestamp: '2026-03-11 05:43:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: //verify/yosupo_predecessor_problem.test.cpp
+documentation_of: //verify/yosupo_ordered_set.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/yosupo_predecessor_problem.test.cpp
-- /verify/verify/yosupo_predecessor_problem.test.cpp.html
-title: verify/yosupo_predecessor_problem.test.cpp
+- /verify/verify/yosupo_ordered_set.test.cpp
+- /verify/verify/yosupo_ordered_set.test.cpp.html
+title: verify/yosupo_ordered_set.test.cpp
 ---

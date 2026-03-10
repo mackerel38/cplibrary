@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/yosupo_ordered_set.test.cpp
+    title: verify/yosupo_ordered_set.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_predecessor_problem.test.cpp
     title: verify/yosupo_predecessor_problem.test.cpp
   _isVerificationFailed: false
@@ -46,23 +49,30 @@ data:
     \ ls = size(t->l);\n      if (k < ls)\n        t = t->l;\n      else if (k ==\
     \ ls) {\n        out = t->key;\n        return true;\n      } else {\n       \
     \ k -= ls + 1;\n        t = t->r;\n      }\n    }\n    return false;\n  }\n\n\
-    \  bool lower_bound(const T& key, T& out) const {\n    node* t = root;\n    bool\
-    \ ok = false;\n    T best;\n    while (t) {\n      if (!cmp(t->key, key)) {\n\
-    \        ok = true;\n        best = t->key;\n        t = t->l;\n      } else {\n\
-    \        t = t->r;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n\n  bool upper_bound(const T& key, T& out) const {\n    node* t = root;\n\
-    \    bool ok = false;\n    T best;\n    while (t) {\n      if (cmp(key, t->key))\
-    \ {\n        ok = true;\n        best = t->key;\n        t = t->l;\n      } else\
-    \ {\n        t = t->r;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n\n  bool prev(const T& key, T& out) const {\n    node* t = root;\n    bool\
-    \ ok = false;\n    T best;\n    while (t) {\n      if (cmp(t->key, key)) {\n \
-    \       ok = true;\n        best = t->key;\n        t = t->r;\n      } else {\n\
-    \        t = t->l;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n\n  bool prev_eq(const T& key, T& out) const {\n    node* t = root;\n  \
-    \  bool ok = false;\n    T best;\n    while (t) {\n      if (!cmp(key, t->key))\
-    \ {\n        ok = true;\n        best = t->key;\n        t = t->r;\n      } else\
-    \ {\n        t = t->l;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n};\n"
+    \  int count_lt(const T& key) const {\n    node* t = root;\n    int res = 0;\n\
+    \    while (t) {\n      if (cmp(key, t->key)) {\n        t = t->l;\n      } else\
+    \ if (cmp(t->key, key)) {\n        res += size(t->l) + 1;\n        t = t->r;\n\
+    \      } else {\n        res += size(t->l);\n        return res;\n      }\n  \
+    \  }\n    return res;\n  }\n\n  int count_le(const T& key) const {\n    node*\
+    \ t = root;\n    int res = 0;\n    while (t) {\n      if (cmp(key, t->key)) {\n\
+    \        t = t->l;\n      } else {\n        res += size(t->l) + 1;\n        t\
+    \ = t->r;\n      }\n    }\n    return res;\n  }\n\n  bool lower_bound(const T&\
+    \ key, T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n\
+    \    while (t) {\n      if (!cmp(t->key, key)) {\n        ok = true;\n       \
+    \ best = t->key;\n        t = t->l;\n      } else {\n        t = t->r;\n     \
+    \ }\n    }\n    if (ok) out = best;\n    return ok;\n  }\n\n  bool upper_bound(const\
+    \ T& key, T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n\
+    \    while (t) {\n      if (cmp(key, t->key)) {\n        ok = true;\n        best\
+    \ = t->key;\n        t = t->l;\n      } else {\n        t = t->r;\n      }\n \
+    \   }\n    if (ok) out = best;\n    return ok;\n  }\n\n  bool prev(const T& key,\
+    \ T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n  \
+    \  while (t) {\n      if (cmp(t->key, key)) {\n        ok = true;\n        best\
+    \ = t->key;\n        t = t->r;\n      } else {\n        t = t->l;\n      }\n \
+    \   }\n    if (ok) out = best;\n    return ok;\n  }\n\n  bool prev_eq(const T&\
+    \ key, T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n\
+    \    while (t) {\n      if (!cmp(key, t->key)) {\n        ok = true;\n       \
+    \ best = t->key;\n        t = t->r;\n      } else {\n        t = t->l;\n     \
+    \ }\n    }\n    if (ok) out = best;\n    return ok;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <class T, class Cmp = less<T>>\nstruct treap {\n  struct node {\n    T key;\n\
     \    uint32_t pr;\n    int sz;\n    node* l;\n    node* r;\n    node(const T&\
@@ -98,38 +108,46 @@ data:
     \ ls = size(t->l);\n      if (k < ls)\n        t = t->l;\n      else if (k ==\
     \ ls) {\n        out = t->key;\n        return true;\n      } else {\n       \
     \ k -= ls + 1;\n        t = t->r;\n      }\n    }\n    return false;\n  }\n\n\
-    \  bool lower_bound(const T& key, T& out) const {\n    node* t = root;\n    bool\
-    \ ok = false;\n    T best;\n    while (t) {\n      if (!cmp(t->key, key)) {\n\
-    \        ok = true;\n        best = t->key;\n        t = t->l;\n      } else {\n\
-    \        t = t->r;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n\n  bool upper_bound(const T& key, T& out) const {\n    node* t = root;\n\
-    \    bool ok = false;\n    T best;\n    while (t) {\n      if (cmp(key, t->key))\
-    \ {\n        ok = true;\n        best = t->key;\n        t = t->l;\n      } else\
-    \ {\n        t = t->r;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n\n  bool prev(const T& key, T& out) const {\n    node* t = root;\n    bool\
-    \ ok = false;\n    T best;\n    while (t) {\n      if (cmp(t->key, key)) {\n \
-    \       ok = true;\n        best = t->key;\n        t = t->r;\n      } else {\n\
-    \        t = t->l;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n\n  bool prev_eq(const T& key, T& out) const {\n    node* t = root;\n  \
-    \  bool ok = false;\n    T best;\n    while (t) {\n      if (!cmp(key, t->key))\
-    \ {\n        ok = true;\n        best = t->key;\n        t = t->r;\n      } else\
-    \ {\n        t = t->l;\n      }\n    }\n    if (ok) out = best;\n    return ok;\n\
-    \  }\n};\n"
+    \  int count_lt(const T& key) const {\n    node* t = root;\n    int res = 0;\n\
+    \    while (t) {\n      if (cmp(key, t->key)) {\n        t = t->l;\n      } else\
+    \ if (cmp(t->key, key)) {\n        res += size(t->l) + 1;\n        t = t->r;\n\
+    \      } else {\n        res += size(t->l);\n        return res;\n      }\n  \
+    \  }\n    return res;\n  }\n\n  int count_le(const T& key) const {\n    node*\
+    \ t = root;\n    int res = 0;\n    while (t) {\n      if (cmp(key, t->key)) {\n\
+    \        t = t->l;\n      } else {\n        res += size(t->l) + 1;\n        t\
+    \ = t->r;\n      }\n    }\n    return res;\n  }\n\n  bool lower_bound(const T&\
+    \ key, T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n\
+    \    while (t) {\n      if (!cmp(t->key, key)) {\n        ok = true;\n       \
+    \ best = t->key;\n        t = t->l;\n      } else {\n        t = t->r;\n     \
+    \ }\n    }\n    if (ok) out = best;\n    return ok;\n  }\n\n  bool upper_bound(const\
+    \ T& key, T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n\
+    \    while (t) {\n      if (cmp(key, t->key)) {\n        ok = true;\n        best\
+    \ = t->key;\n        t = t->l;\n      } else {\n        t = t->r;\n      }\n \
+    \   }\n    if (ok) out = best;\n    return ok;\n  }\n\n  bool prev(const T& key,\
+    \ T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n  \
+    \  while (t) {\n      if (cmp(t->key, key)) {\n        ok = true;\n        best\
+    \ = t->key;\n        t = t->r;\n      } else {\n        t = t->l;\n      }\n \
+    \   }\n    if (ok) out = best;\n    return ok;\n  }\n\n  bool prev_eq(const T&\
+    \ key, T& out) const {\n    node* t = root;\n    bool ok = false;\n    T best;\n\
+    \    while (t) {\n      if (!cmp(key, t->key)) {\n        ok = true;\n       \
+    \ best = t->key;\n        t = t->r;\n      } else {\n        t = t->l;\n     \
+    \ }\n    }\n    if (ok) out = best;\n    return ok;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: structure/treap.hpp
   requiredBy: []
-  timestamp: '2026-03-11 05:31:47+09:00'
+  timestamp: '2026-03-11 05:43:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_predecessor_problem.test.cpp
+  - verify/yosupo_ordered_set.test.cpp
 documentation_of: //structure/treap.hpp
 layout: document
 title: Treap
 ---
 
 Definition
-Treap は乱数優先度付きの二分探索木であり、順序付き集合として insert/erase/contains と順序統計（kth、lower_bound、upper_bound、prev、prev_eq）を提供する。
+Treap は乱数優先度付きの二分探索木であり、順序付き集合として insert/erase/contains と順序統計（kth、count_lt、count_le、lower_bound、upper_bound、prev、prev_eq）を提供する。
 
 Complexity
 各操作は期待 O(log n)。

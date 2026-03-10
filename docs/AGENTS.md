@@ -39,7 +39,7 @@ Config rules (日本語):
 - ドキュメントの先頭には YAML front matter を入れてください。形式は以下のとおりです。
   ---
   title: [タイトル]
-  documentation_of: [ライブラリのパス(例: //structure/segtree.hpp)]
+  documentation_of: [ライブラリのパス(例: structure/segtree.hpp)]
   ---
 - config/<category>/<name>.md にドキュメントを作成すること。
 - 各ドキュメントは必ず先頭に "Definition"（操作の定義）と "Complexity"（計算量：Big-O）を書くこと。

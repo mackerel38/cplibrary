@@ -135,6 +135,37 @@ struct treap {
     return false;
   }
 
+  int count_lt(const T& key) const {
+    node* t = root;
+    int res = 0;
+    while (t) {
+      if (cmp(key, t->key)) {
+        t = t->l;
+      } else if (cmp(t->key, key)) {
+        res += size(t->l) + 1;
+        t = t->r;
+      } else {
+        res += size(t->l);
+        return res;
+      }
+    }
+    return res;
+  }
+
+  int count_le(const T& key) const {
+    node* t = root;
+    int res = 0;
+    while (t) {
+      if (cmp(key, t->key)) {
+        t = t->l;
+      } else {
+        res += size(t->l) + 1;
+        t = t->r;
+      }
+    }
+    return res;
+  }
+
   bool lower_bound(const T& key, T& out) const {
     node* t = root;
     bool ok = false;
