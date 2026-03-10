@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo_static_range_sum.test.cpp
+    title: verify/yosupo_static_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/segtree.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -69,8 +72,9 @@ data:
   path: structure/segtree.hpp
   requiredBy: []
   timestamp: '2026-03-11 04:15:33+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo_static_range_sum.test.cpp
 documentation_of: //structure/segtree.hpp
 layout: document
 title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -87,6 +91,6 @@ Complexity
 モノイドに対して区間クエリと更新を行う。
 
 使い方
-`segtree<S> seg(n);`
+`segtree<S, op, e> seg(n);`
 `seg.set(i, x);`
 `seg.prod(l, r);`

@@ -14,6 +14,6 @@ Complexity
 モノイドに対して区間クエリと更新を行う。
 
 使い方
-`segtree<S> seg(n);`
+`segtree<S, op, e> seg(n);`
 `seg.set(i, x);`
 `seg.prod(l, r);`

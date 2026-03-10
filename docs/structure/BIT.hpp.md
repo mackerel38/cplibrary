@@ -6,9 +6,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo_point_add_range_sum.test.cpp
     title: verify/yosupo_point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo_point_add_range_sum_2.test.cpp
-    title: verify/yosupo_point_add_range_sum_2.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -43,7 +40,6 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_point_add_range_sum.test.cpp
-  - verify/yosupo_point_add_range_sum_2.test.cpp
 documentation_of: //structure/BIT.hpp
 layout: document
 title: Binary Indexed Tree

@@ -9,7 +9,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: structure/segtree.hpp
       title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   verificationCategories:
@@ -22,7 +22,7 @@ data:
       path: verify/yosupo_point_add_range_sum.test.cpp
       title: verify/yosupo_point_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/yosupo_point_add_range_sum_2.test.cpp
-      title: verify/yosupo_point_add_range_sum_2.test.cpp
+      path: verify/yosupo_static_range_sum.test.cpp
+      title: verify/yosupo_static_range_sum.test.cpp
 layout: toppage
 ---
