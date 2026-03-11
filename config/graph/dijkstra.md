@@ -9,6 +9,11 @@ Definition
 Complexity
 O((N+M) log N)。
 
+ポイント
+- 非負重みの最短路専用
+- 距離と直前頂点の配列を返す
+- 経路復元と相性が良い
+
 使い方
 
 - `dijkstra_result res = dijkstra(g, s);` で始点 s からの最短距離を計算する。

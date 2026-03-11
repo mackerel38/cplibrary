@@ -9,6 +9,11 @@ Definition
 Complexity
 各操作はならし O(log N α(N))。
 
+ポイント
+- 同じ長さの区間を位置対応で一括併合できる
+- 連結成分の和とペア積の総和を管理する
+- 大きな区間併合を高速化する設計
+
 使い方
 
 - `range_parallel_unionfind<Ops> uf(n);` で作成する。

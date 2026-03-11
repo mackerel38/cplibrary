@@ -9,6 +9,11 @@ Definition
 Complexity
 各操作は O(1)。
 
+ポイント
+- 一次関数を軽量に扱う
+- 合成と加算の補助関数を用意
+- `eval` で値を直接計算できる
+
 使い方
 
 - `affine<T> f(a, b);` で f(x)=ax+b を作る。

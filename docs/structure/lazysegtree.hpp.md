@@ -106,6 +106,11 @@ Definition
 Complexity
 各操作は O(log N)。
 
+ポイント
+- 区間更新と区間取得を同時に扱える
+- 作用素の合成と単位元を用意する
+- `mapping` と `composition` の設計が肝
+
 使い方
 
 - `lazysegtree<S, op, e, F, mapping, composition, id> seg(n);` で作成する。

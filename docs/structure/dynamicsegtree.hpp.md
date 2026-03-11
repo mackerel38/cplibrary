@@ -71,6 +71,11 @@ Definition
 Complexity
 各操作は O(log N)。
 
+ポイント
+- 巨大な N に対して必要なノードだけ確保する
+- 点更新と区間取得が基本操作
+- 空ノードは `e()` として扱う
+
 使い方
 
 - `dynamic_segtree<S, op, e> seg(n);` で区間 [0, n) を扱う。

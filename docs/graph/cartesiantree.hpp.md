@@ -54,6 +54,11 @@ Definition
 Complexity
 O(n)。
 
+ポイント
+- in-order が元配列の順序になる
+- 根は最小値（または最大値）になる
+- RMQ 関連の前処理として使える
+
 使い方
 
 - `cartesian_tree<T, Cmp> ct(a);` で配列 a から構築する。

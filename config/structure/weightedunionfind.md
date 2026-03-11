@@ -9,6 +9,11 @@ Definition
 Complexity
 各操作はならし O(α(n))。
 
+ポイント
+- 差分制約を管理できる Union-Find
+- 連結なら `a_u - a_v` を取得できる
+- 矛盾があるときに検出できる
+
 使い方
 
 - `weighted_unionfind<T, Op> uf(n);` で要素数 n の集合を作る。

@@ -70,6 +70,11 @@ Definition
 Complexity
 O(n)。
 
+ポイント
+- 木の各種配列を一括で取得できる
+- LCA や部分木クエリの前処理に有用
+- Euler 列と深さ列を提供する
+
 使い方
 
 - `euler_tour et; et.build(g, root);` で木 g（隣接リスト）を根 root から走査する。

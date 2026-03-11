@@ -103,6 +103,11 @@ Definition
 Complexity
 各演算は O(1)、冪と逆元は O(log MOD)。
 
+ポイント
+- 法演算を安全に扱える整数型
+- 素数 MOD を前提に逆元を計算する
+- 入出力演算子が定義済み
+
 使い方
 
 - `using mint = modint<MOD>;` で型を定義する。

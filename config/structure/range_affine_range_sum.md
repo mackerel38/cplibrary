@@ -9,6 +9,11 @@ Definition
 Complexity
 各操作は O(log N)。
 
+ポイント
+- 区間一次変換と区間和を同時に扱う
+- `b` と `c` は一次変換の係数
+- `MOD` をテンプレート引数で指定できる
+
 使い方
 
 - `range_affine_range_sum<MOD> seg(n);` で長さ n を作る。
