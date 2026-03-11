@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/yosupo_point_set_range_composite.test.cpp
+    title: verify/yosupo_point_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_static_range_sum.test.cpp
     title: verify/yosupo_static_range_sum.test.cpp
   _isVerificationFailed: false
@@ -74,6 +77,7 @@ data:
   timestamp: '2026-03-11 04:15:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/yosupo_point_set_range_composite.test.cpp
   - verify/yosupo_static_range_sum.test.cpp
 documentation_of: //structure/segtree.hpp
 layout: document

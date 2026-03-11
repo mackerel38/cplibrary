@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/yosupo_point_set_range_composite.test.cpp
+    title: verify/yosupo_point_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_range_parallel_unionfind.test.cpp
     title: verify/yosupo_range_parallel_unionfind.test.cpp
   - icon: ':heavy_check_mark:'
@@ -66,6 +69,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_range_parallel_unionfind.test.cpp
+  - verify/yosupo_point_set_range_composite.test.cpp
   - verify/yosupo_unionfind_with_potential.test.cpp
   - verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
 documentation_of: //math/modint.hpp

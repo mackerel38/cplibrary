@@ -21,6 +21,9 @@ data:
   - name: math
     pages:
     - icon: ':heavy_check_mark:'
+      path: math/affine.hpp
+      title: Affine
+    - icon: ':heavy_check_mark:'
       path: math/mat2.hpp
       title: "2x2 \u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -70,6 +73,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_point_add_range_sum.test.cpp
       title: verify/yosupo_point_add_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_point_set_range_composite.test.cpp
+      title: verify/yosupo_point_set_range_composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_predecessor_problem.test.cpp
       title: verify/yosupo_predecessor_problem.test.cpp
