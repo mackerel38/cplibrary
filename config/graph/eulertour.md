@@ -8,3 +8,13 @@ Definition
 
 Complexity
 O(n)。
+
+使い方
+`euler_tour et; et.build(g, root);` で木 g（隣接リスト）を根 root から走査する。
+`et.in[v]` は v の入時刻（0..n-1）。
+`et.out[v]` は v の出時刻（0..n）。
+`et.order[t]` は入時刻 t の頂点。
+`et.parent[v]` は親、`et.depth[v]` は深さ。
+`et.euler` は Euler 列（長さ 2n-1）、`et.depth_euler` は対応する深さ列。
+`et.first[v]` は `et.euler` における v の初出位置。
+`et.dfs(g, s);` は内部用の DFS で、通常は `build` から呼ぶ。
