@@ -49,6 +49,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/lazysegtree.hpp
       title: Lazy Segment Tree
+    - icon: ':warning:'
+      path: structure/persistentarray.hpp
+      title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':heavy_check_mark:'
       path: structure/range_affine_range_sum.hpp
       title: Range Affine Range Sum
