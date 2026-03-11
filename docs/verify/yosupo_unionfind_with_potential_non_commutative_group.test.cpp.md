@@ -38,8 +38,14 @@ data:
     \ idet);\n    r.a10 = Ops::mul(Ops::neg(x.a10), idet);\n    r.a11 = Ops::mul(x.a00,\
     \ idet);\n    return r;\n  }\n\n  bool operator==(const mat2 &o) const {\n   \
     \ return a00 == o.a00 && a01 == o.a01 && a10 == o.a10 &&\n           a11 == o.a11;\n\
-    \  }\n};\n#line 3 \"math/modint.hpp\"\nusing namespace std;\n\ntemplate <long\
-    \ long MOD>\nstruct modint {\n  long long v;\n\n  modint() : v(0) {}\n  modint(long\
+    \  }\n\n  bool operator!=(const mat2 &o) const { return !(*this == o); }\n\n \
+    \ mat2 operator+(const mat2 &o) const {\n    return mat2(Ops::add(a00, o.a00),\
+    \ Ops::add(a01, o.a01),\n                Ops::add(a10, o.a10), Ops::add(a11, o.a11));\n\
+    \  }\n\n  mat2 operator-(const mat2 &o) const {\n    return mat2(Ops::sub(a00,\
+    \ o.a00), Ops::sub(a01, o.a01),\n                Ops::sub(a10, o.a10), Ops::sub(a11,\
+    \ o.a11));\n  }\n\n  mat2 operator*(const mat2 &o) const { return op(*this, o);\
+    \ }\n};\n#line 3 \"math/modint.hpp\"\nusing namespace std;\n\ntemplate <long long\
+    \ MOD>\nstruct modint {\n  long long v;\n\n  modint() : v(0) {}\n  modint(long\
     \ long x) {\n    x %= MOD;\n    if (x < 0) x += MOD;\n    v = x;\n  }\n\n  static\
     \ modint raw(long long x) {\n    modint m;\n    m.v = x;\n    return m;\n  }\n\
     \n  modint& operator+=(const modint& o) {\n    v += o.v;\n    if (v >= MOD) v\
@@ -119,7 +125,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 16:50:45+09:00'
+  timestamp: '2026-03-11 20:06:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp

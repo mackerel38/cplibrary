@@ -15,5 +15,7 @@ Complexity
 - `mat2<Ops> id = mat2<Ops>::id();` で単位行列を作る。
 - `mat2<Ops>::op(x, y);` で行列積 x*y を返す。
 - `mat2<Ops>::inv(x);` で逆行列を返す。
-- `x == y` で要素ごとの一致を判定する。
+- `x == y` と `x != y` で要素ごとの一致を判定する。
+- `x + y` と `x - y` は要素ごとの加減算。
+- `x * y` は行列積。
 - `Ops::zero(), Ops::one(), Ops::add, Ops::sub, Ops::mul, Ops::neg, Ops::inv` を定義する。

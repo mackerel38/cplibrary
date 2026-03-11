@@ -37,4 +37,18 @@ struct mat2 {
     return a00 == o.a00 && a01 == o.a01 && a10 == o.a10 &&
            a11 == o.a11;
   }
+
+  bool operator!=(const mat2 &o) const { return !(*this == o); }
+
+  mat2 operator+(const mat2 &o) const {
+    return mat2(Ops::add(a00, o.a00), Ops::add(a01, o.a01),
+                Ops::add(a10, o.a10), Ops::add(a11, o.a11));
+  }
+
+  mat2 operator-(const mat2 &o) const {
+    return mat2(Ops::sub(a00, o.a00), Ops::sub(a01, o.a01),
+                Ops::sub(a10, o.a10), Ops::sub(a11, o.a11));
+  }
+
+  mat2 operator*(const mat2 &o) const { return op(*this, o); }
 };
