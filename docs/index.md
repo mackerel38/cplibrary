@@ -80,6 +80,9 @@ data:
       path: structure/unionfind.hpp
       title: Union-Find
     - icon: ':heavy_check_mark:'
+      path: structure/waveletmatrix.hpp
+      title: Wavelet Matrix
+    - icon: ':heavy_check_mark:'
       path: structure/weightedunionfind.hpp
       title: "\u91CD\u307F\u4ED8\u304D Union-Find"
   - name: utility
@@ -126,6 +129,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_chmin_chmax_add_range_sum.test.cpp
       title: verify/yosupo_range_chmin_chmax_add_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_range_kth_smallest.test.cpp
+      title: verify/yosupo_range_kth_smallest.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_parallel_unionfind.test.cpp
       title: verify/yosupo_range_parallel_unionfind.test.cpp
