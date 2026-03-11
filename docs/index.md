@@ -1,6 +1,17 @@
 ---
 data:
   libraryCategories:
+  - name: graph
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: graph/dijkstra.hpp
+      title: Dijkstra
+    - icon: ':heavy_check_mark:'
+      path: graph/graphtemplate.hpp
+      title: Graph Template
+    - icon: ':heavy_check_mark:'
+      path: graph/restore_shortestpath.hpp
+      title: Restore Shortest Path
   - name: math
     pages:
     - icon: ':heavy_check_mark:'
@@ -56,6 +67,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_parallel_unionfind.test.cpp
       title: verify/yosupo_range_parallel_unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_shortest_path.test.cpp
+      title: verify/yosupo_shortest_path.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_static_range_sum.test.cpp
       title: verify/yosupo_static_range_sum.test.cpp
