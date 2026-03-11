@@ -7,6 +7,9 @@ data:
     title: Range Affine Range Sum
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/yosupo_persistent_range_affine_range_sum.test.cpp
+    title: verify/yosupo_persistent_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_point_set_range_composite.test.cpp
     title: verify/yosupo_point_set_range_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -53,6 +56,7 @@ data:
   - verify/yosupo_range_affine_point_get.test.cpp
   - verify/yosupo_range_affine_range_sum_large_array.test.cpp
   - verify/yosupo_range_affine_range_sum.test.cpp
+  - verify/yosupo_persistent_range_affine_range_sum.test.cpp
 documentation_of: //math/affine.hpp
 layout: document
 title: Affine
