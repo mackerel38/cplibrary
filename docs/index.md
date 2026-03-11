@@ -44,6 +44,9 @@ data:
       path: structure/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
     - icon: ':heavy_check_mark:'
+      path: structure/lazysegtree.hpp
+      title: Lazy Segment Tree
+    - icon: ':heavy_check_mark:'
       path: structure/rangeparallel_unionfind.hpp
       title: Range Parallel Union-Find
     - icon: ':heavy_check_mark:'
@@ -85,6 +88,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_predecessor_problem.test.cpp
       title: verify/yosupo_predecessor_problem.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_range_affine_point_get.test.cpp
+      title: verify/yosupo_range_affine_point_get.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_parallel_unionfind.test.cpp
       title: verify/yosupo_range_parallel_unionfind.test.cpp
