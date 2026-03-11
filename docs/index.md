@@ -124,6 +124,9 @@ data:
       path: verify/yosupo_range_parallel_unionfind.test.cpp
       title: verify/yosupo_range_parallel_unionfind.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/yosupo_range_set_range_composite.test.cpp
+      title: verify/yosupo_range_set_range_composite.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo_shortest_path.test.cpp
       title: verify/yosupo_shortest_path.test.cpp
     - icon: ':heavy_check_mark:'

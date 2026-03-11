@@ -28,6 +28,9 @@ data:
     path: verify/yosupo_range_parallel_unionfind.test.cpp
     title: verify/yosupo_range_parallel_unionfind.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/yosupo_range_set_range_composite.test.cpp
+    title: verify/yosupo_range_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_unionfind_with_potential.test.cpp
     title: verify/yosupo_unionfind_with_potential.test.cpp
   - icon: ':heavy_check_mark:'
@@ -89,6 +92,7 @@ data:
   verifiedWith:
   - verify/yosupo_point_set_range_composite_large_array.test.cpp
   - verify/yosupo_range_parallel_unionfind.test.cpp
+  - verify/yosupo_range_set_range_composite.test.cpp
   - verify/yosupo_point_set_range_composite.test.cpp
   - verify/yosupo_unionfind_with_potential.test.cpp
   - verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
