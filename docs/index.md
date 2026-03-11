@@ -52,6 +52,12 @@ data:
     - icon: ':warning:'
       path: structure/persistentarray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
+    - icon: ':warning:'
+      path: structure/persistentlazysegtree.hpp
+      title: "\u6C38\u7D9A\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':warning:'
+      path: structure/persistentsegtree.hpp
+      title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: structure/range_affine_range_sum.hpp
       title: Range Affine Range Sum
