@@ -12,26 +12,42 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/bipq.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\ntemplate <class T>\nstruct bipq {\n  multiset<T> s;\n\n  int size()\
-    \ const { return (int)s.size(); }\n  bool empty() const { return s.empty(); }\n\
-    \n  void push(const T& x) { s.insert(x); }\n\n  T min() const { return *s.begin();\
-    \ }\n  T max() const {\n    auto it = s.end();\n    --it;\n    return *it;\n \
-    \ }\n\n  T pop_min() {\n    auto it = s.begin();\n    T v = *it;\n    s.erase(it);\n\
-    \    return v;\n  }\n\n  T pop_max() {\n    auto it = s.end();\n    --it;\n  \
-    \  T v = *it;\n    s.erase(it);\n    return v;\n  }\n};\n"
+    \ std;\n\ntemplate <class T>\nstruct bipq {\n  priority_queue<T, vector<T>, greater<T>>\
+    \ mn;\n  priority_queue<T> mx;\n  map<T, int> cnt;\n  int sz = 0;\n\n  int size()\
+    \ const { return sz; }\n  bool empty() const { return sz == 0; }\n\n  void push(const\
+    \ T& x) {\n    mn.push(x);\n    mx.push(x);\n    cnt[x]++;\n    sz++;\n  }\n\n\
+    \  void clean_min() {\n    while (!mn.empty()) {\n      T v = mn.top();\n    \
+    \  auto it = cnt.find(v);\n      if (it != cnt.end() && it->second > 0) break;\n\
+    \      mn.pop();\n    }\n  }\n\n  void clean_max() {\n    while (!mx.empty())\
+    \ {\n      T v = mx.top();\n      auto it = cnt.find(v);\n      if (it != cnt.end()\
+    \ && it->second > 0) break;\n      mx.pop();\n    }\n  }\n\n  T min() {\n    clean_min();\n\
+    \    return mn.top();\n  }\n\n  T max() {\n    clean_max();\n    return mx.top();\n\
+    \  }\n\n  T pop_min() {\n    clean_min();\n    T v = mn.top();\n    mn.pop();\n\
+    \    cnt[v]--;\n    if (cnt[v] == 0) cnt.erase(v);\n    sz--;\n    return v;\n\
+    \  }\n\n  T pop_max() {\n    clean_max();\n    T v = mx.top();\n    mx.pop();\n\
+    \    cnt[v]--;\n    if (cnt[v] == 0) cnt.erase(v);\n    sz--;\n    return v;\n\
+    \  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <class T>\nstruct bipq {\n  multiset<T> s;\n\n  int size() const { return (int)s.size();\
-    \ }\n  bool empty() const { return s.empty(); }\n\n  void push(const T& x) { s.insert(x);\
-    \ }\n\n  T min() const { return *s.begin(); }\n  T max() const {\n    auto it\
-    \ = s.end();\n    --it;\n    return *it;\n  }\n\n  T pop_min() {\n    auto it\
-    \ = s.begin();\n    T v = *it;\n    s.erase(it);\n    return v;\n  }\n\n  T pop_max()\
-    \ {\n    auto it = s.end();\n    --it;\n    T v = *it;\n    s.erase(it);\n   \
-    \ return v;\n  }\n};\n"
+    \ <class T>\nstruct bipq {\n  priority_queue<T, vector<T>, greater<T>> mn;\n \
+    \ priority_queue<T> mx;\n  map<T, int> cnt;\n  int sz = 0;\n\n  int size() const\
+    \ { return sz; }\n  bool empty() const { return sz == 0; }\n\n  void push(const\
+    \ T& x) {\n    mn.push(x);\n    mx.push(x);\n    cnt[x]++;\n    sz++;\n  }\n\n\
+    \  void clean_min() {\n    while (!mn.empty()) {\n      T v = mn.top();\n    \
+    \  auto it = cnt.find(v);\n      if (it != cnt.end() && it->second > 0) break;\n\
+    \      mn.pop();\n    }\n  }\n\n  void clean_max() {\n    while (!mx.empty())\
+    \ {\n      T v = mx.top();\n      auto it = cnt.find(v);\n      if (it != cnt.end()\
+    \ && it->second > 0) break;\n      mx.pop();\n    }\n  }\n\n  T min() {\n    clean_min();\n\
+    \    return mn.top();\n  }\n\n  T max() {\n    clean_max();\n    return mx.top();\n\
+    \  }\n\n  T pop_min() {\n    clean_min();\n    T v = mn.top();\n    mn.pop();\n\
+    \    cnt[v]--;\n    if (cnt[v] == 0) cnt.erase(v);\n    sz--;\n    return v;\n\
+    \  }\n\n  T pop_max() {\n    clean_max();\n    T v = mx.top();\n    mx.pop();\n\
+    \    cnt[v]--;\n    if (cnt[v] == 0) cnt.erase(v);\n    sz--;\n    return v;\n\
+    \  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: structure/bipq.hpp
   requiredBy: []
-  timestamp: '2026-03-11 05:51:27+09:00'
+  timestamp: '2026-03-11 15:55:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_double_ended_priority_queue.test.cpp
