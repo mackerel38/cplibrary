@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/cartesiantree.hpp
     title: Cartesian Tree
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/eulertour.hpp
     title: Euler Tour
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/sparsetable.hpp
     title: Sparse Table RMQ
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/staticrmq
@@ -118,7 +118,7 @@ data:
   path: verify/yosupo_staticrmq.test.cpp
   requiredBy: []
   timestamp: '2026-03-11 17:19:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_staticrmq.test.cpp
 layout: document

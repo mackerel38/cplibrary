@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: graph
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/cartesiantree.hpp
       title: Cartesian Tree
     - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: Dijkstra
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/eulertour.hpp
       title: Euler Tour
     - icon: ':heavy_check_mark:'
@@ -43,7 +43,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/segtree.hpp
       title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: structure/sparsetable.hpp
       title: Sparse Table RMQ
     - icon: ':heavy_check_mark:'
@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_static_range_sum.test.cpp
       title: verify/yosupo_static_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo_staticrmq.test.cpp
       title: verify/yosupo_staticrmq.test.cpp
     - icon: ':heavy_check_mark:'

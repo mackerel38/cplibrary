@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/sparsetable.hpp
     title: Sparse Table RMQ
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_staticrmq.test.cpp
     title: verify/yosupo_staticrmq.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/eulertour.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -64,7 +64,7 @@ data:
   requiredBy:
   - structure/sparsetable.hpp
   timestamp: '2026-03-11 17:16:57+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_staticrmq.test.cpp
 documentation_of: //graph/eulertour.hpp
