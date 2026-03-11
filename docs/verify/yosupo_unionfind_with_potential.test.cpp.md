@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: math/modint.hpp
+    title: modint
+  - icon: ':heavy_check_mark:'
     path: structure/weightedunionfind.hpp
     title: "\u91CD\u307F\u4ED8\u304D Union-Find"
   _extendedRequiredBy: []
@@ -16,9 +19,28 @@ data:
     - https://judge.yosupo.jp/problem/unionfind_with_potential
   bundledCode: "#line 1 \"verify/yosupo_unionfind_with_potential.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/unionfind_with_potential\"\n#line\
-    \ 2 \"structure/weightedunionfind.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\ntemplate <class T, class Op>\nstruct weighted_unionfind {\n  int n;\n\
-    \  vector<int> p;\n  vector<int> sz;\n  vector<T> w;\n\n  weighted_unionfind()\
+    \ 2 \"math/modint.hpp\"\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
+    \ <long long MOD>\nstruct modint {\n  long long v;\n\n  modint() : v(0) {}\n \
+    \ modint(long long x) {\n    x %= MOD;\n    if (x < 0) x += MOD;\n    v = x;\n\
+    \  }\n\n  static modint raw(long long x) {\n    modint m;\n    m.v = x;\n    return\
+    \ m;\n  }\n\n  modint& operator+=(const modint& o) {\n    v += o.v;\n    if (v\
+    \ >= MOD) v -= MOD;\n    return *this;\n  }\n  modint& operator-=(const modint&\
+    \ o) {\n    v -= o.v;\n    if (v < 0) v += MOD;\n    return *this;\n  }\n  modint&\
+    \ operator*=(const modint& o) {\n    v = (long long)((__int128)v * o.v % MOD);\n\
+    \    return *this;\n  }\n\n  modint operator+(const modint& o) const { return\
+    \ modint(*this) += o; }\n  modint operator-(const modint& o) const { return modint(*this)\
+    \ -= o; }\n  modint operator*(const modint& o) const { return modint(*this) *=\
+    \ o; }\n\n  modint operator-() const { return v == 0 ? *this : modint::raw(MOD\
+    \ - v); }\n\n  bool operator==(const modint& o) const { return v == o.v; }\n \
+    \ bool operator!=(const modint& o) const { return v != o.v; }\n\n  static modint\
+    \ pow(modint a, long long e) {\n    modint r = 1;\n    while (e > 0) {\n     \
+    \ if (e & 1) r *= a;\n      a *= a;\n      e >>= 1;\n    }\n    return r;\n  }\n\
+    \n  static modint inv(modint a) { return pow(a, MOD - 2); }\n\n  friend ostream&\
+    \ operator<<(ostream& os, const modint& x) {\n    return os << x.v;\n  }\n  friend\
+    \ istream& operator>>(istream& is, modint& x) {\n    long long t;\n    is >> t;\n\
+    \    x = modint(t);\n    return is;\n  }\n};\n#line 3 \"structure/weightedunionfind.hpp\"\
+    \nusing namespace std;\n\ntemplate <class T, class Op>\nstruct weighted_unionfind\
+    \ {\n  int n;\n  vector<int> p;\n  vector<int> sz;\n  vector<T> w;\n\n  weighted_unionfind()\
     \ : n(0) {}\n  weighted_unionfind(int n_) { init(n_); }\n\n  void init(int n_)\
     \ {\n    n = n_;\n    p.resize(n);\n    sz.assign(n, 1);\n    w.assign(n, Op::id());\n\
     \    iota(p.begin(), p.end(), 0);\n  }\n\n  T mul(const T &a, const T &b) { return\
@@ -34,39 +56,38 @@ data:
     \ {\n      p[ra] = rb;\n      sz[rb] += sz[ra];\n      w[ra] = mul(mul(wb, x),\
     \ inv(wa));\n    } else {\n      p[rb] = ra;\n      sz[ra] += sz[rb];\n      w[rb]\
     \ = mul(mul(wa, inv(x)), inv(wb));\n    }\n    return true;\n  }\n\n  int size(int\
-    \ x) { return sz[leader(x)]; }\n};\n#line 3 \"verify/yosupo_unionfind_with_potential.test.cpp\"\
-    \n\nstatic const long long MOD = 998244353;\n\nstruct mod_add {\n  static long\
-    \ long id() { return 0; }\n  static long long op(long long a, long long b) {\n\
-    \    long long v = a + b;\n    if (v >= MOD) v -= MOD;\n    return v;\n  }\n \
-    \ static long long inv(long long a) { return a == 0 ? 0 : MOD - a; }\n};\n\nint\
-    \ main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int N, Q;\n\
-    \  cin >> N >> Q;\n  weighted_unionfind<long long, mod_add> uf(N);\n  for (int\
-    \ i = 0; i < Q; i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int\
-    \ u, v;\n      long long x;\n      cin >> u >> v >> x;\n      x %= MOD;\n    \
-    \  cout << (uf.merge(u, v, x) ? 1 : 0) << \"\\n\";\n    } else {\n      int u,\
-    \ v;\n      cin >> u >> v;\n      long long ans;\n      if (uf.get(u, v, ans))\
-    \ {\n        cout << ans << \"\\n\";\n      } else {\n        cout << -1 << \"\
-    \\n\";\n      }\n    }\n  }\n  return 0;\n}\n"
+    \ x) { return sz[leader(x)]; }\n};\n#line 4 \"verify/yosupo_unionfind_with_potential.test.cpp\"\
+    \n\nstatic const long long MOD = 998244353;\nusing mint = modint<MOD>;\n\nstruct\
+    \ mod_add {\n  static mint id() { return mint(0); }\n  static mint op(mint a,\
+    \ mint b) { return a + b; }\n  static mint inv(mint a) { return -a; }\n};\n\n\
+    int main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int N, Q;\n\
+    \  cin >> N >> Q;\n  weighted_unionfind<mint, mod_add> uf(N);\n  for (int i =\
+    \ 0; i < Q; i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int u,\
+    \ v;\n      mint x;\n      cin >> u >> v >> x;\n      cout << (uf.merge(u, v,\
+    \ x) ? 1 : 0) << \"\\n\";\n    } else {\n      int u, v;\n      cin >> u >> v;\n\
+    \      mint ans;\n      if (uf.get(u, v, ans)) {\n        cout << ans << \"\\\
+    n\";\n      } else {\n        cout << -1 << \"\\n\";\n      }\n    }\n  }\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind_with_potential\"\
-    \n#include \"structure/weightedunionfind.hpp\"\n\nstatic const long long MOD =\
-    \ 998244353;\n\nstruct mod_add {\n  static long long id() { return 0; }\n  static\
-    \ long long op(long long a, long long b) {\n    long long v = a + b;\n    if (v\
-    \ >= MOD) v -= MOD;\n    return v;\n  }\n  static long long inv(long long a) {\
-    \ return a == 0 ? 0 : MOD - a; }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n\
-    \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  weighted_unionfind<long\
-    \ long, mod_add> uf(N);\n  for (int i = 0; i < Q; i++) {\n    int t;\n    cin\
-    \ >> t;\n    if (t == 0) {\n      int u, v;\n      long long x;\n      cin >>\
-    \ u >> v >> x;\n      x %= MOD;\n      cout << (uf.merge(u, v, x) ? 1 : 0) <<\
-    \ \"\\n\";\n    } else {\n      int u, v;\n      cin >> u >> v;\n      long long\
-    \ ans;\n      if (uf.get(u, v, ans)) {\n        cout << ans << \"\\n\";\n    \
-    \  } else {\n        cout << -1 << \"\\n\";\n      }\n    }\n  }\n  return 0;\n\
-    }\n"
+    \n#include \"math/modint.hpp\"\n#include \"structure/weightedunionfind.hpp\"\n\
+    \nstatic const long long MOD = 998244353;\nusing mint = modint<MOD>;\n\nstruct\
+    \ mod_add {\n  static mint id() { return mint(0); }\n  static mint op(mint a,\
+    \ mint b) { return a + b; }\n  static mint inv(mint a) { return -a; }\n};\n\n\
+    int main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int N, Q;\n\
+    \  cin >> N >> Q;\n  weighted_unionfind<mint, mod_add> uf(N);\n  for (int i =\
+    \ 0; i < Q; i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int u,\
+    \ v;\n      mint x;\n      cin >> u >> v >> x;\n      cout << (uf.merge(u, v,\
+    \ x) ? 1 : 0) << \"\\n\";\n    } else {\n      int u, v;\n      cin >> u >> v;\n\
+    \      mint ans;\n      if (uf.get(u, v, ans)) {\n        cout << ans << \"\\\
+    n\";\n      } else {\n        cout << -1 << \"\\n\";\n      }\n    }\n  }\n  return\
+    \ 0;\n}\n"
   dependsOn:
+  - math/modint.hpp
   - structure/weightedunionfind.hpp
   isVerificationFile: true
   path: verify/yosupo_unionfind_with_potential.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 16:14:53+09:00'
+  timestamp: '2026-03-11 16:50:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_unionfind_with_potential.test.cpp

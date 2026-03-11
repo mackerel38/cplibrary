@@ -5,6 +5,9 @@ data:
     path: math/mat2.hpp
     title: "2x2 \u884C\u5217"
   - icon: ':heavy_check_mark:'
+    path: math/modint.hpp
+    title: modint
+  - icon: ':heavy_check_mark:'
     path: structure/weightedunionfind.hpp
     title: "\u91CD\u307F\u4ED8\u304D Union-Find"
   _extendedRequiredBy: []
@@ -35,8 +38,27 @@ data:
     \ idet);\n    r.a10 = Ops::mul(Ops::neg(x.a10), idet);\n    r.a11 = Ops::mul(x.a00,\
     \ idet);\n    return r;\n  }\n\n  bool operator==(const mat2 &o) const {\n   \
     \ return a00 == o.a00 && a01 == o.a01 && a10 == o.a10 &&\n           a11 == o.a11;\n\
-    \  }\n};\n#line 3 \"structure/weightedunionfind.hpp\"\nusing namespace std;\n\n\
-    template <class T, class Op>\nstruct weighted_unionfind {\n  int n;\n  vector<int>\
+    \  }\n};\n#line 3 \"math/modint.hpp\"\nusing namespace std;\n\ntemplate <long\
+    \ long MOD>\nstruct modint {\n  long long v;\n\n  modint() : v(0) {}\n  modint(long\
+    \ long x) {\n    x %= MOD;\n    if (x < 0) x += MOD;\n    v = x;\n  }\n\n  static\
+    \ modint raw(long long x) {\n    modint m;\n    m.v = x;\n    return m;\n  }\n\
+    \n  modint& operator+=(const modint& o) {\n    v += o.v;\n    if (v >= MOD) v\
+    \ -= MOD;\n    return *this;\n  }\n  modint& operator-=(const modint& o) {\n \
+    \   v -= o.v;\n    if (v < 0) v += MOD;\n    return *this;\n  }\n  modint& operator*=(const\
+    \ modint& o) {\n    v = (long long)((__int128)v * o.v % MOD);\n    return *this;\n\
+    \  }\n\n  modint operator+(const modint& o) const { return modint(*this) += o;\
+    \ }\n  modint operator-(const modint& o) const { return modint(*this) -= o; }\n\
+    \  modint operator*(const modint& o) const { return modint(*this) *= o; }\n\n\
+    \  modint operator-() const { return v == 0 ? *this : modint::raw(MOD - v); }\n\
+    \n  bool operator==(const modint& o) const { return v == o.v; }\n  bool operator!=(const\
+    \ modint& o) const { return v != o.v; }\n\n  static modint pow(modint a, long\
+    \ long e) {\n    modint r = 1;\n    while (e > 0) {\n      if (e & 1) r *= a;\n\
+    \      a *= a;\n      e >>= 1;\n    }\n    return r;\n  }\n\n  static modint inv(modint\
+    \ a) { return pow(a, MOD - 2); }\n\n  friend ostream& operator<<(ostream& os,\
+    \ const modint& x) {\n    return os << x.v;\n  }\n  friend istream& operator>>(istream&\
+    \ is, modint& x) {\n    long long t;\n    is >> t;\n    x = modint(t);\n    return\
+    \ is;\n  }\n};\n#line 3 \"structure/weightedunionfind.hpp\"\nusing namespace std;\n\
+    \ntemplate <class T, class Op>\nstruct weighted_unionfind {\n  int n;\n  vector<int>\
     \ p;\n  vector<int> sz;\n  vector<T> w;\n\n  weighted_unionfind() : n(0) {}\n\
     \  weighted_unionfind(int n_) { init(n_); }\n\n  void init(int n_) {\n    n =\
     \ n_;\n    p.resize(n);\n    sz.assign(n, 1);\n    w.assign(n, Op::id());\n  \
@@ -53,17 +75,13 @@ data:
     \ {\n      p[ra] = rb;\n      sz[rb] += sz[ra];\n      w[ra] = mul(mul(wb, x),\
     \ inv(wa));\n    } else {\n      p[rb] = ra;\n      sz[ra] += sz[rb];\n      w[rb]\
     \ = mul(mul(wa, inv(x)), inv(wb));\n    }\n    return true;\n  }\n\n  int size(int\
-    \ x) { return sz[leader(x)]; }\n};\n#line 4 \"verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp\"\
-    \n\nstatic const long long MOD = 998244353;\n\nstruct mod_ops {\n  using T = long\
-    \ long;\n  static T zero() { return 0; }\n  static T one() { return 1; }\n  static\
-    \ T add(T a, T b) {\n    T v = a + b;\n    if (v >= MOD) v -= MOD;\n    return\
-    \ v;\n  }\n  static T sub(T a, T b) {\n    T v = a - b;\n    if (v < 0) v += MOD;\n\
-    \    return v;\n  }\n  static T mul(T a, T b) { return a * b % MOD; }\n  static\
-    \ T modpow(T a, T e) {\n    T r = 1;\n    while (e > 0) {\n      if (e & 1) r\
-    \ = r * a % MOD;\n      a = a * a % MOD;\n      e >>= 1;\n    }\n    return r;\n\
-    \  }\n  static T inv(T a) { return modpow(a, MOD - 2); }\n  static T neg(T a)\
-    \ { return a == 0 ? 0 : MOD - a; }\n};\n\nusing mat = mat2<mod_ops>;\n\nstruct\
-    \ mat_group {\n  static mat id() { return mat::id(); }\n  static mat op(const\
+    \ x) { return sz[leader(x)]; }\n};\n#line 5 \"verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp\"\
+    \n\nstatic const long long MOD = 998244353;\n\nstruct mod_ops {\n  using T = modint<MOD>;\n\
+    \  static T zero() { return T(0); }\n  static T one() { return T(1); }\n  static\
+    \ T add(T a, T b) { return a + b; }\n  static T sub(T a, T b) { return a - b;\
+    \ }\n  static T mul(T a, T b) { return a * b; }\n  static T inv(T a) { return\
+    \ T::inv(a); }\n  static T neg(T a) { return -a; }\n};\n\nusing mat = mat2<mod_ops>;\n\
+    \nstruct mat_group {\n  static mat id() { return mat::id(); }\n  static mat op(const\
     \ mat &a, const mat &b) { return mat::op(a, b); }\n  static mat inv(const mat\
     \ &a) { return mat::inv(a); }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n\
     \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  weighted_unionfind<mat,\
@@ -76,17 +94,13 @@ data:
     \           << ans.a11 << \"\\n\";\n      } else {\n        cout << -1 << \"\\\
     n\";\n      }\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind_with_potential_non_commutative_group\"\
-    \n#include \"math/mat2.hpp\"\n#include \"structure/weightedunionfind.hpp\"\n\n\
-    static const long long MOD = 998244353;\n\nstruct mod_ops {\n  using T = long\
-    \ long;\n  static T zero() { return 0; }\n  static T one() { return 1; }\n  static\
-    \ T add(T a, T b) {\n    T v = a + b;\n    if (v >= MOD) v -= MOD;\n    return\
-    \ v;\n  }\n  static T sub(T a, T b) {\n    T v = a - b;\n    if (v < 0) v += MOD;\n\
-    \    return v;\n  }\n  static T mul(T a, T b) { return a * b % MOD; }\n  static\
-    \ T modpow(T a, T e) {\n    T r = 1;\n    while (e > 0) {\n      if (e & 1) r\
-    \ = r * a % MOD;\n      a = a * a % MOD;\n      e >>= 1;\n    }\n    return r;\n\
-    \  }\n  static T inv(T a) { return modpow(a, MOD - 2); }\n  static T neg(T a)\
-    \ { return a == 0 ? 0 : MOD - a; }\n};\n\nusing mat = mat2<mod_ops>;\n\nstruct\
-    \ mat_group {\n  static mat id() { return mat::id(); }\n  static mat op(const\
+    \n#include \"math/mat2.hpp\"\n#include \"math/modint.hpp\"\n#include \"structure/weightedunionfind.hpp\"\
+    \n\nstatic const long long MOD = 998244353;\n\nstruct mod_ops {\n  using T = modint<MOD>;\n\
+    \  static T zero() { return T(0); }\n  static T one() { return T(1); }\n  static\
+    \ T add(T a, T b) { return a + b; }\n  static T sub(T a, T b) { return a - b;\
+    \ }\n  static T mul(T a, T b) { return a * b; }\n  static T inv(T a) { return\
+    \ T::inv(a); }\n  static T neg(T a) { return -a; }\n};\n\nusing mat = mat2<mod_ops>;\n\
+    \nstruct mat_group {\n  static mat id() { return mat::id(); }\n  static mat op(const\
     \ mat &a, const mat &b) { return mat::op(a, b); }\n  static mat inv(const mat\
     \ &a) { return mat::inv(a); }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n\
     \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  weighted_unionfind<mat,\
@@ -100,11 +114,12 @@ data:
     n\";\n      }\n    }\n  }\n  return 0;\n}\n"
   dependsOn:
   - math/mat2.hpp
+  - math/modint.hpp
   - structure/weightedunionfind.hpp
   isVerificationFile: true
   path: verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 16:27:02+09:00'
+  timestamp: '2026-03-11 16:50:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp

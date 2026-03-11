@@ -1,35 +1,19 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind_with_potential_non_commutative_group"
 #include "math/mat2.hpp"
+#include "math/modint.hpp"
 #include "structure/weightedunionfind.hpp"
 
 static const long long MOD = 998244353;
 
 struct mod_ops {
-  using T = long long;
-  static T zero() { return 0; }
-  static T one() { return 1; }
-  static T add(T a, T b) {
-    T v = a + b;
-    if (v >= MOD) v -= MOD;
-    return v;
-  }
-  static T sub(T a, T b) {
-    T v = a - b;
-    if (v < 0) v += MOD;
-    return v;
-  }
-  static T mul(T a, T b) { return a * b % MOD; }
-  static T modpow(T a, T e) {
-    T r = 1;
-    while (e > 0) {
-      if (e & 1) r = r * a % MOD;
-      a = a * a % MOD;
-      e >>= 1;
-    }
-    return r;
-  }
-  static T inv(T a) { return modpow(a, MOD - 2); }
-  static T neg(T a) { return a == 0 ? 0 : MOD - a; }
+  using T = modint<MOD>;
+  static T zero() { return T(0); }
+  static T one() { return T(1); }
+  static T add(T a, T b) { return a + b; }
+  static T sub(T a, T b) { return a - b; }
+  static T mul(T a, T b) { return a * b; }
+  static T inv(T a) { return T::inv(a); }
+  static T neg(T a) { return -a; }
 };
 
 using mat = mat2<mod_ops>;

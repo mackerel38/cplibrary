@@ -6,6 +6,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/mat2.hpp
       title: "2x2 \u884C\u5217"
+    - icon: ':heavy_check_mark:'
+      path: math/modint.hpp
+      title: modint
   - name: structure
     pages:
     - icon: ':heavy_check_mark:'

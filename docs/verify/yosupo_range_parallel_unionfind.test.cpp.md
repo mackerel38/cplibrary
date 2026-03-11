@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: math/modint.hpp
+    title: modint
+  - icon: ':heavy_check_mark:'
     path: structure/rangeparallel_unionfind.hpp
     title: Range Parallel Union-Find
   _extendedRequiredBy: []
@@ -16,9 +19,28 @@ data:
     - https://judge.yosupo.jp/problem/range_parallel_unionfind
   bundledCode: "#line 1 \"verify/yosupo_range_parallel_unionfind.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/range_parallel_unionfind\"\n#line\
-    \ 2 \"structure/rangeparallel_unionfind.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\ntemplate <class Ops>\nstruct range_parallel_unionfind {\n\
-    \  using T = typename Ops::T;\n  int n, lg;\n  vector<int> p0, sz0;\n  vector<T>\
+    \ 2 \"math/modint.hpp\"\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
+    \ <long long MOD>\nstruct modint {\n  long long v;\n\n  modint() : v(0) {}\n \
+    \ modint(long long x) {\n    x %= MOD;\n    if (x < 0) x += MOD;\n    v = x;\n\
+    \  }\n\n  static modint raw(long long x) {\n    modint m;\n    m.v = x;\n    return\
+    \ m;\n  }\n\n  modint& operator+=(const modint& o) {\n    v += o.v;\n    if (v\
+    \ >= MOD) v -= MOD;\n    return *this;\n  }\n  modint& operator-=(const modint&\
+    \ o) {\n    v -= o.v;\n    if (v < 0) v += MOD;\n    return *this;\n  }\n  modint&\
+    \ operator*=(const modint& o) {\n    v = (long long)((__int128)v * o.v % MOD);\n\
+    \    return *this;\n  }\n\n  modint operator+(const modint& o) const { return\
+    \ modint(*this) += o; }\n  modint operator-(const modint& o) const { return modint(*this)\
+    \ -= o; }\n  modint operator*(const modint& o) const { return modint(*this) *=\
+    \ o; }\n\n  modint operator-() const { return v == 0 ? *this : modint::raw(MOD\
+    \ - v); }\n\n  bool operator==(const modint& o) const { return v == o.v; }\n \
+    \ bool operator!=(const modint& o) const { return v != o.v; }\n\n  static modint\
+    \ pow(modint a, long long e) {\n    modint r = 1;\n    while (e > 0) {\n     \
+    \ if (e & 1) r *= a;\n      a *= a;\n      e >>= 1;\n    }\n    return r;\n  }\n\
+    \n  static modint inv(modint a) { return pow(a, MOD - 2); }\n\n  friend ostream&\
+    \ operator<<(ostream& os, const modint& x) {\n    return os << x.v;\n  }\n  friend\
+    \ istream& operator>>(istream& is, modint& x) {\n    long long t;\n    is >> t;\n\
+    \    x = modint(t);\n    return is;\n  }\n};\n#line 3 \"structure/rangeparallel_unionfind.hpp\"\
+    \nusing namespace std;\n\ntemplate <class Ops>\nstruct range_parallel_unionfind\
+    \ {\n  using T = typename Ops::T;\n  int n, lg;\n  vector<int> p0, sz0;\n  vector<T>\
     \ sum;\n  T cur;\n  vector<vector<int>> p, sz;\n\n  range_parallel_unionfind()\
     \ : n(0), lg(0), cur(Ops::zero()) {}\n  range_parallel_unionfind(int n_) { init(n_);\
     \ }\n\n  void init(int n_) {\n    n = n_;\n    lg = 1;\n    while ((1 << lg) <=\
@@ -43,33 +65,34 @@ data:
     \    unite_block(l - 1, a + half, b + half);\n  }\n\n  void merge_range(int a,\
     \ int b, int k) {\n    for (int l = 0; k > 0; l++) {\n      if (k & 1) {\n   \
     \     unite_block(l, a, b);\n        a += 1 << l;\n        b += 1 << l;\n    \
-    \  }\n      k >>= 1;\n    }\n  }\n};\n#line 3 \"verify/yosupo_range_parallel_unionfind.test.cpp\"\
-    \n\nstatic const long long MOD = 998244353;\n\nstruct mod_ops {\n  using T = long\
-    \ long;\n  static T zero() { return 0; }\n  static T add(T a, T b) {\n    T v\
-    \ = a + b;\n    if (v >= MOD) v -= MOD;\n    return v;\n  }\n  static T mul(T\
-    \ a, T b) { return a * b % MOD; }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n\
-    \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  vector<long long> x(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    cin >> x[i];\n    x[i] %= MOD;\n  }\n  range_parallel_unionfind<mod_ops>\
-    \ uf(N);\n  uf.set_values(x);\n  for (int i = 0; i < Q; i++) {\n    int k, a,\
-    \ b;\n    cin >> k >> a >> b;\n    uf.merge_range(a, b, k);\n    cout << uf.cur\
-    \ % MOD << \"\\n\";\n  }\n  return 0;\n}\n"
+    \  }\n      k >>= 1;\n    }\n  }\n};\n#line 4 \"verify/yosupo_range_parallel_unionfind.test.cpp\"\
+    \n\nstatic const long long MOD = 998244353;\nusing mint = modint<MOD>;\n\nstruct\
+    \ mod_ops {\n  using T = mint;\n  static T zero() { return T(0); }\n  static T\
+    \ add(T a, T b) { return a + b; }\n  static T mul(T a, T b) { return a * b; }\n\
+    };\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int\
+    \ N, Q;\n  cin >> N >> Q;\n  vector<mint> x(N);\n  for (int i = 0; i < N; i++)\
+    \ {\n    cin >> x[i];\n  }\n  range_parallel_unionfind<mod_ops> uf(N);\n  uf.set_values(x);\n\
+    \  for (int i = 0; i < Q; i++) {\n    int k, a, b;\n    cin >> k >> a >> b;\n\
+    \    uf.merge_range(a, b, k);\n    cout << uf.cur << \"\\n\";\n  }\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_parallel_unionfind\"\
-    \n#include \"structure/rangeparallel_unionfind.hpp\"\n\nstatic const long long\
-    \ MOD = 998244353;\n\nstruct mod_ops {\n  using T = long long;\n  static T zero()\
-    \ { return 0; }\n  static T add(T a, T b) {\n    T v = a + b;\n    if (v >= MOD)\
-    \ v -= MOD;\n    return v;\n  }\n  static T mul(T a, T b) { return a * b % MOD;\
-    \ }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<long long> x(N);\n  for (int i = 0; i\
-    \ < N; i++) {\n    cin >> x[i];\n    x[i] %= MOD;\n  }\n  range_parallel_unionfind<mod_ops>\
-    \ uf(N);\n  uf.set_values(x);\n  for (int i = 0; i < Q; i++) {\n    int k, a,\
-    \ b;\n    cin >> k >> a >> b;\n    uf.merge_range(a, b, k);\n    cout << uf.cur\
-    \ % MOD << \"\\n\";\n  }\n  return 0;\n}\n"
+    \n#include \"math/modint.hpp\"\n#include \"structure/rangeparallel_unionfind.hpp\"\
+    \n\nstatic const long long MOD = 998244353;\nusing mint = modint<MOD>;\n\nstruct\
+    \ mod_ops {\n  using T = mint;\n  static T zero() { return T(0); }\n  static T\
+    \ add(T a, T b) { return a + b; }\n  static T mul(T a, T b) { return a * b; }\n\
+    };\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int\
+    \ N, Q;\n  cin >> N >> Q;\n  vector<mint> x(N);\n  for (int i = 0; i < N; i++)\
+    \ {\n    cin >> x[i];\n  }\n  range_parallel_unionfind<mod_ops> uf(N);\n  uf.set_values(x);\n\
+    \  for (int i = 0; i < Q; i++) {\n    int k, a, b;\n    cin >> k >> a >> b;\n\
+    \    uf.merge_range(a, b, k);\n    cout << uf.cur << \"\\n\";\n  }\n  return 0;\n\
+    }\n"
   dependsOn:
+  - math/modint.hpp
   - structure/rangeparallel_unionfind.hpp
   isVerificationFile: true
   path: verify/yosupo_range_parallel_unionfind.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 16:43:51+09:00'
+  timestamp: '2026-03-11 16:50:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_range_parallel_unionfind.test.cpp
