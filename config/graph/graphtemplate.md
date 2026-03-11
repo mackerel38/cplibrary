@@ -10,8 +10,9 @@ Complexity
 辺追加は O(1)。
 
 使い方
-`graph g(n);` で頂点数 n のグラフを作る。
-`g.init(n);` で再初期化する。
-`g.add_edge(a, b, w);` で a -> b の重み w 辺を追加する。
-`g[i]` で頂点 i の隣接辺列 `vector<graph::edge>` を参照できる。
-`graph::edge` は `to` と `w` を持つ。
+
+- `graph g(n);` で頂点数 n のグラフを作る。
+- `g.init(n);` で再初期化する。
+- `g.add_edge(a, b, w);` で a -> b の重み w 辺を追加する。
+- `g[i]` で頂点 i の隣接辺列 `vector<graph::edge>` を参照できる。
+- `graph::edge` は `to` と `w` を持つ。
