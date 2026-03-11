@@ -1,17 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: structure/sparsetable.hpp
-    title: Sparse Table RMQ
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo_staticrmq.test.cpp
-    title: verify/yosupo_staticrmq.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/cartesiantree.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -45,12 +39,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: graph/cartesiantree.hpp
-  requiredBy:
-  - structure/sparsetable.hpp
+  requiredBy: []
   timestamp: '2026-03-11 17:13:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/yosupo_staticrmq.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: //graph/cartesiantree.hpp
 layout: document
 title: Cartesian Tree

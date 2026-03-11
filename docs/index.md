@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: graph/cartesiantree.hpp
       title: Cartesian Tree
     - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: Dijkstra
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: graph/eulertour.hpp
       title: Euler Tour
     - icon: ':heavy_check_mark:'
