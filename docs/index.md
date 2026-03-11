@@ -4,7 +4,7 @@ data:
   - name: math
     pages:
     - icon: ':heavy_check_mark:'
-      path: math/matrix.hpp
+      path: math/mat2.hpp
       title: "2x2 \u884C\u5217"
   - name: structure
     pages:
