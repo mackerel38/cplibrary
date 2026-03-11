@@ -1,6 +1,6 @@
 ---
 title: 動的遅延セグメント木
-documentation_of: structure/dynamiclazysegtree.hpp
+documentation_of: //structure/dynamiclazysegtree.hpp
 ---
 Definition
 区間更新と区間取得をサポートする動的セグメント木。
