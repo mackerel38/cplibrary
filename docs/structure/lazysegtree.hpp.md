@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: structure/range_affine_range_sum.hpp
+    title: Range Affine Range Sum
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo_range_affine_point_get.test.cpp
     title: verify/yosupo_range_affine_point_get.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo_range_affine_range_sum.test.cpp
+    title: verify/yosupo_range_affine_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -82,11 +88,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: structure/lazysegtree.hpp
-  requiredBy: []
+  requiredBy:
+  - structure/range_affine_range_sum.hpp
   timestamp: '2026-03-11 18:08:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo_range_affine_point_get.test.cpp
+  - verify/yosupo_range_affine_range_sum.test.cpp
 documentation_of: //structure/lazysegtree.hpp
 layout: document
 title: Lazy Segment Tree

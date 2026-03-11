@@ -47,6 +47,9 @@ data:
       path: structure/lazysegtree.hpp
       title: Lazy Segment Tree
     - icon: ':heavy_check_mark:'
+      path: structure/range_affine_range_sum.hpp
+      title: Range Affine Range Sum
+    - icon: ':heavy_check_mark:'
       path: structure/rangeparallel_unionfind.hpp
       title: Range Parallel Union-Find
     - icon: ':heavy_check_mark:'
@@ -91,6 +94,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_affine_point_get.test.cpp
       title: verify/yosupo_range_affine_point_get.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_range_affine_range_sum.test.cpp
+      title: verify/yosupo_range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_parallel_unionfind.test.cpp
       title: verify/yosupo_range_parallel_unionfind.test.cpp
