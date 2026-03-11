@@ -19,17 +19,13 @@ struct F {
 };
 
 aff aff_pow(aff f, long long n) {
-  if (n == 0) return aff(mint(1), mint(0));
-  mint a = f.a;
-  mint b = f.b;
-  mint ap = mint::pow(a, n);
-  mint s;
-  if (a.v == 1) {
-    s = mint(n);
-  } else {
-    s = (ap - mint(1)) * mint::inv(a - mint(1));
+  aff res(mint(1), mint(0));
+  while (n > 0) {
+    if (n & 1) res = affine_compose(f, res);
+    f = affine_compose(f, f);
+    n >>= 1;
   }
-  return aff(ap, b * s);
+  return res;
 }
 
 S op(S a, S b) { return {affine_compose(b.f, a.f), a.len + b.len}; }

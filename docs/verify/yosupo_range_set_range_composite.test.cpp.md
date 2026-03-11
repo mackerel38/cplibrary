@@ -84,10 +84,9 @@ data:
     \ }\n};\n#line 6 \"verify/yosupo_range_set_range_composite.test.cpp\"\nusing namespace\
     \ std;\n\nusing mint = modint<998244353>;\nusing aff = affine<mint>;\n\nstruct\
     \ S {\n  aff f;\n  int len;\n};\n\nstruct F {\n  aff f;\n  bool has;\n};\n\naff\
-    \ aff_pow(aff f, long long n) {\n  if (n == 0) return aff(mint(1), mint(0));\n\
-    \  mint a = f.a;\n  mint b = f.b;\n  mint ap = mint::pow(a, n);\n  mint s;\n \
-    \ if (a.v == 1) {\n    s = mint(n);\n  } else {\n    s = (ap - mint(1)) * mint::inv(a\
-    \ - mint(1));\n  }\n  return aff(ap, b * s);\n}\n\nS op(S a, S b) { return {affine_compose(b.f,\
+    \ aff_pow(aff f, long long n) {\n  aff res(mint(1), mint(0));\n  while (n > 0)\
+    \ {\n    if (n & 1) res = affine_compose(f, res);\n    f = affine_compose(f, f);\n\
+    \    n >>= 1;\n  }\n  return res;\n}\n\nS op(S a, S b) { return {affine_compose(b.f,\
     \ a.f), a.len + b.len}; }\nS e() { return {aff(mint(1), mint(0)), 0}; }\n\nS mapping(F\
     \ f, S x) {\n  if (!f.has) return x;\n  return {aff_pow(f.f, x.len), x.len};\n\
     }\n\nF composition(F f, F g) { return f.has ? f : g; }\nF id() { return {aff(mint(1),\
@@ -106,13 +105,12 @@ data:
     \ \"math/modint.hpp\"\n#include <bits/stdc++.h>\nusing namespace std;\n\nusing\
     \ mint = modint<998244353>;\nusing aff = affine<mint>;\n\nstruct S {\n  aff f;\n\
     \  int len;\n};\n\nstruct F {\n  aff f;\n  bool has;\n};\n\naff aff_pow(aff f,\
-    \ long long n) {\n  if (n == 0) return aff(mint(1), mint(0));\n  mint a = f.a;\n\
-    \  mint b = f.b;\n  mint ap = mint::pow(a, n);\n  mint s;\n  if (a.v == 1) {\n\
-    \    s = mint(n);\n  } else {\n    s = (ap - mint(1)) * mint::inv(a - mint(1));\n\
-    \  }\n  return aff(ap, b * s);\n}\n\nS op(S a, S b) { return {affine_compose(b.f,\
-    \ a.f), a.len + b.len}; }\nS e() { return {aff(mint(1), mint(0)), 0}; }\n\nS mapping(F\
-    \ f, S x) {\n  if (!f.has) return x;\n  return {aff_pow(f.f, x.len), x.len};\n\
-    }\n\nF composition(F f, F g) { return f.has ? f : g; }\nF id() { return {aff(mint(1),\
+    \ long long n) {\n  aff res(mint(1), mint(0));\n  while (n > 0) {\n    if (n &\
+    \ 1) res = affine_compose(f, res);\n    f = affine_compose(f, f);\n    n >>= 1;\n\
+    \  }\n  return res;\n}\n\nS op(S a, S b) { return {affine_compose(b.f, a.f), a.len\
+    \ + b.len}; }\nS e() { return {aff(mint(1), mint(0)), 0}; }\n\nS mapping(F f,\
+    \ S x) {\n  if (!f.has) return x;\n  return {aff_pow(f.f, x.len), x.len};\n}\n\
+    \nF composition(F f, F g) { return f.has ? f : g; }\nF id() { return {aff(mint(1),\
     \ mint(0)), false}; }\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  vector<S> v(N);\n  for (int i = 0; i < N; i++)\
     \ {\n    long long a, b;\n    cin >> a >> b;\n    v[i] = {aff(mint(a), mint(b)),\
@@ -130,7 +128,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo_range_set_range_composite.test.cpp
   requiredBy: []
-  timestamp: '2026-03-12 00:25:57+09:00'
+  timestamp: '2026-03-12 00:44:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_range_set_range_composite.test.cpp
