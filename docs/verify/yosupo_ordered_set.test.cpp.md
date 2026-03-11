@@ -4,6 +4,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/treap.hpp
     title: Treap
+  - icon: ':heavy_check_mark:'
+    path: utility/randgen.hpp
+    title: "\u4E71\u6570\u751F\u6210"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,29 +19,37 @@ data:
     - https://judge.yosupo.jp/problem/ordered_set
   bundledCode: "#line 1 \"verify/yosupo_ordered_set.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/ordered_set\"\n#line 2 \"structure/treap.hpp\"\
-    \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <class T, class Cmp\
-    \ = less<T>>\nstruct treap {\n  struct node {\n    T key;\n    uint32_t pr;\n\
-    \    int sz;\n    node* l;\n    node* r;\n    node(const T& k, uint32_t p) : key(k),\
-    \ pr(p), sz(1), l(nullptr), r(nullptr) {}\n  };\n\n  Cmp cmp;\n  uint64_t seed;\n\
-    \  node* root;\n\n  treap() : cmp(), seed(88172645463325252ULL), root(nullptr)\
-    \ {}\n\n  static int size(node* t) { return t ? t->sz : 0; }\n  static void pull(node*\
-    \ t) {\n    if (t) t->sz = 1 + size(t->l) + size(t->r);\n  }\n\n  int size() const\
-    \ { return size(root); }\n\n  uint32_t rnd() {\n    seed ^= seed << 7;\n    seed\
-    \ ^= seed >> 9;\n    return (uint32_t)seed;\n  }\n\n  bool eq(const T& a, const\
-    \ T& b) const { return !cmp(a, b) && !cmp(b, a); }\n\n  void split(node* t, const\
-    \ T& key, node*& a, node*& b) {\n    if (!t) {\n      a = nullptr;\n      b =\
-    \ nullptr;\n      return;\n    }\n    if (cmp(t->key, key)) {\n      split(t->r,\
-    \ key, t->r, b);\n      a = t;\n      pull(a);\n    } else {\n      split(t->l,\
-    \ key, a, t->l);\n      b = t;\n      pull(b);\n    }\n  }\n\n  node* merge(node*\
-    \ a, node* b) {\n    if (!a || !b) return a ? a : b;\n    if (a->pr > b->pr) {\n\
-    \      a->r = merge(a->r, b);\n      pull(a);\n      return a;\n    } else {\n\
-    \      b->l = merge(a, b->l);\n      pull(b);\n      return b;\n    }\n  }\n\n\
-    \  bool contains(const T& key) const {\n    node* t = root;\n    while (t) {\n\
-    \      if (eq(key, t->key)) return true;\n      if (cmp(key, t->key))\n      \
-    \  t = t->l;\n      else\n        t = t->r;\n    }\n    return false;\n  }\n\n\
-    \  void insert(const T& key) {\n    if (contains(key)) return;\n    node* it =\
-    \ new node(key, rnd());\n    insert(root, it);\n  }\n\n  void insert(node*& t,\
-    \ node* it) {\n    if (!t) {\n      t = it;\n      return;\n    }\n    if (it->pr\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"utility/randgen.hpp\"\
+    \nusing namespace std;\n\nstruct randgen {\n  mt19937_64 rng;\n\n  randgen() {\n\
+    \    uint64_t seed = (uint64_t)chrono::steady_clock::now().time_since_epoch().count();\n\
+    \    rng.seed(seed);\n  }\n\n  uint64_t u64() { return rng(); }\n\n  long long\
+    \ ll(long long l, long long r) {\n    return uniform_int_distribution<long long>(l,\
+    \ r - 1)(rng);\n  }\n\n  int i(int l, int r) { return uniform_int_distribution<int>(l,\
+    \ r - 1)(rng); }\n\n  double real(double l = 0.0, double r = 1.0) {\n    return\
+    \ uniform_real_distribution<double>(l, r)(rng);\n  }\n\n  template <class T>\n\
+    \  void shuffle_vec(vector<T>& v) {\n    shuffle(v.begin(), v.end(), rng);\n \
+    \ }\n};\n#line 6 \"structure/treap.hpp\"\n\ntemplate <class T, class Cmp = less<T>>\n\
+    struct treap {\n  struct node {\n    T key;\n    uint32_t pr;\n    int sz;\n \
+    \   node* l;\n    node* r;\n    node(const T& k, uint32_t p) : key(k), pr(p),\
+    \ sz(1), l(nullptr), r(nullptr) {}\n  };\n\n  Cmp cmp;\n  randgen rg;\n  node*\
+    \ root;\n\n  treap() : cmp(), rg(), root(nullptr) {}\n\n  static int size(node*\
+    \ t) { return t ? t->sz : 0; }\n  static void pull(node* t) {\n    if (t) t->sz\
+    \ = 1 + size(t->l) + size(t->r);\n  }\n\n  int size() const { return size(root);\
+    \ }\n\n  uint32_t rnd() { return (uint32_t)rg.u64(); }\n\n  bool eq(const T& a,\
+    \ const T& b) const { return !cmp(a, b) && !cmp(b, a); }\n\n  void split(node*\
+    \ t, const T& key, node*& a, node*& b) {\n    if (!t) {\n      a = nullptr;\n\
+    \      b = nullptr;\n      return;\n    }\n    if (cmp(t->key, key)) {\n     \
+    \ split(t->r, key, t->r, b);\n      a = t;\n      pull(a);\n    } else {\n   \
+    \   split(t->l, key, a, t->l);\n      b = t;\n      pull(b);\n    }\n  }\n\n \
+    \ node* merge(node* a, node* b) {\n    if (!a || !b) return a ? a : b;\n    if\
+    \ (a->pr > b->pr) {\n      a->r = merge(a->r, b);\n      pull(a);\n      return\
+    \ a;\n    } else {\n      b->l = merge(a, b->l);\n      pull(b);\n      return\
+    \ b;\n    }\n  }\n\n  bool contains(const T& key) const {\n    node* t = root;\n\
+    \    while (t) {\n      if (eq(key, t->key)) return true;\n      if (cmp(key,\
+    \ t->key))\n        t = t->l;\n      else\n        t = t->r;\n    }\n    return\
+    \ false;\n  }\n\n  void insert(const T& key) {\n    if (contains(key)) return;\n\
+    \    node* it = new node(key, rnd());\n    insert(root, it);\n  }\n\n  void insert(node*&\
+    \ t, node* it) {\n    if (!t) {\n      t = it;\n      return;\n    }\n    if (it->pr\
     \ > t->pr) {\n      split(t, it->key, it->l, it->r);\n      t = it;\n      pull(t);\n\
     \      return;\n    }\n    if (cmp(it->key, t->key))\n      insert(t->l, it);\n\
     \    else\n      insert(t->r, it);\n    pull(t);\n  }\n\n  void erase(const T&\
@@ -103,10 +114,11 @@ data:
     }\n"
   dependsOn:
   - structure/treap.hpp
+  - utility/randgen.hpp
   isVerificationFile: true
   path: verify/yosupo_ordered_set.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 05:43:40+09:00'
+  timestamp: '2026-03-11 22:08:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_ordered_set.test.cpp

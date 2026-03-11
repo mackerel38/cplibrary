@@ -73,6 +73,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/weightedunionfind.hpp
       title: "\u91CD\u307F\u4ED8\u304D Union-Find"
+  - name: utility
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: utility/randgen.hpp
+      title: "\u4E71\u6570\u751F\u6210"
   verificationCategories:
   - name: verify
     pages:

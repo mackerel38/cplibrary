@@ -2,6 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include "utility/randgen.hpp"
+
 template <class T, class Cmp = less<T>>
 struct treap {
   struct node {
@@ -14,10 +16,10 @@ struct treap {
   };
 
   Cmp cmp;
-  uint64_t seed;
+  randgen rg;
   node* root;
 
-  treap() : cmp(), seed(88172645463325252ULL), root(nullptr) {}
+  treap() : cmp(), rg(), root(nullptr) {}
 
   static int size(node* t) { return t ? t->sz : 0; }
   static void pull(node* t) {
@@ -26,11 +28,7 @@ struct treap {
 
   int size() const { return size(root); }
 
-  uint32_t rnd() {
-    seed ^= seed << 7;
-    seed ^= seed >> 9;
-    return (uint32_t)seed;
-  }
+  uint32_t rnd() { return (uint32_t)rg.u64(); }
 
   bool eq(const T& a, const T& b) const { return !cmp(a, b) && !cmp(b, a); }
 
