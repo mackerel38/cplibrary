@@ -27,7 +27,7 @@ int main() {
   cin.tie(nullptr);
   long long N;
   int Q;
-  if (!(cin >> N >> Q)) return 0;
+  cin >> N >> Q;
   dynamic_lazysegtree<S, op, e, make, F, mapping, composition, id> seg(N);
   for (int i = 0; i < Q; i++) {
     int t;

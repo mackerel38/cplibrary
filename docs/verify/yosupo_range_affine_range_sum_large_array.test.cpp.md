@@ -95,13 +95,12 @@ data:
     \ {mint(0), len}; }\nS mapping(F f, S x) { return {f.a * x.sum + f.b * mint(x.len),\
     \ x.len}; }\nF composition(F f, F g) { return affine_compose(f, g); }\nF id()\
     \ { return F(); }\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\
-    \  long long N;\n  int Q;\n  if (!(cin >> N >> Q)) return 0;\n  dynamic_lazysegtree<S,\
-    \ op, e, make, F, mapping, composition, id> seg(N);\n  for (int i = 0; i < Q;\
-    \ i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      long long l, r;\n\
-    \      long long b, c;\n      cin >> l >> r >> b >> c;\n      seg.apply(l, r,\
-    \ F(mint(b), mint(c)));\n    } else {\n      long long l, r;\n      cin >> l >>\
-    \ r;\n      cout << seg.prod(l, r).sum.v << \"\\n\";\n    }\n  }\n  return 0;\n\
-    }\n"
+    \  long long N;\n  int Q;\n  cin >> N >> Q;\n  dynamic_lazysegtree<S, op, e, make,\
+    \ F, mapping, composition, id> seg(N);\n  for (int i = 0; i < Q; i++) {\n    int\
+    \ t;\n    cin >> t;\n    if (t == 0) {\n      long long l, r;\n      long long\
+    \ b, c;\n      cin >> l >> r >> b >> c;\n      seg.apply(l, r, F(mint(b), mint(c)));\n\
+    \    } else {\n      long long l, r;\n      cin >> l >> r;\n      cout << seg.prod(l,\
+    \ r).sum.v << \"\\n\";\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum_large_array\"\
     \n#include <bits/stdc++.h>\nusing namespace std;\n\n#include \"math/affine.hpp\"\
     \n#include \"math/modint.hpp\"\n#include \"structure/dynamiclazysegtree.hpp\"\n\
@@ -111,13 +110,12 @@ data:
     \ {mint(0), len}; }\nS mapping(F f, S x) { return {f.a * x.sum + f.b * mint(x.len),\
     \ x.len}; }\nF composition(F f, F g) { return affine_compose(f, g); }\nF id()\
     \ { return F(); }\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\
-    \  long long N;\n  int Q;\n  if (!(cin >> N >> Q)) return 0;\n  dynamic_lazysegtree<S,\
-    \ op, e, make, F, mapping, composition, id> seg(N);\n  for (int i = 0; i < Q;\
-    \ i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      long long l, r;\n\
-    \      long long b, c;\n      cin >> l >> r >> b >> c;\n      seg.apply(l, r,\
-    \ F(mint(b), mint(c)));\n    } else {\n      long long l, r;\n      cin >> l >>\
-    \ r;\n      cout << seg.prod(l, r).sum.v << \"\\n\";\n    }\n  }\n  return 0;\n\
-    }\n"
+    \  long long N;\n  int Q;\n  cin >> N >> Q;\n  dynamic_lazysegtree<S, op, e, make,\
+    \ F, mapping, composition, id> seg(N);\n  for (int i = 0; i < Q; i++) {\n    int\
+    \ t;\n    cin >> t;\n    if (t == 0) {\n      long long l, r;\n      long long\
+    \ b, c;\n      cin >> l >> r >> b >> c;\n      seg.apply(l, r, F(mint(b), mint(c)));\n\
+    \    } else {\n      long long l, r;\n      cin >> l >> r;\n      cout << seg.prod(l,\
+    \ r).sum.v << \"\\n\";\n    }\n  }\n  return 0;\n}\n"
   dependsOn:
   - math/affine.hpp
   - math/modint.hpp
@@ -125,7 +123,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo_range_affine_range_sum_large_array.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 20:50:06+09:00'
+  timestamp: '2026-03-11 21:23:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_range_affine_range_sum_large_array.test.cpp
