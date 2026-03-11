@@ -20,13 +20,13 @@ struct weighted_unionfind {
     iota(p.begin(), p.end(), 0);
   }
 
-  T add(T a, T b) { return Op::op(a, b); }
-  T sub(T a, T b) { return Op::op(a, Op::inv(b)); }
+  T mul(const T &a, const T &b) { return Op::op(a, b); }
+  T inv(const T &a) { return Op::inv(a); }
 
   int leader(int x) {
     if (p[x] == x) return x;
     int r = leader(p[x]);
-    w[x] = add(w[x], w[p[x]]);
+    w[x] = mul(w[p[x]], w[x]);
     return p[x] = r;
   }
 
@@ -37,7 +37,7 @@ struct weighted_unionfind {
 
   bool same(int a, int b) { return leader(a) == leader(b); }
 
-  T diff(int a, int b) { return sub(weight(a), weight(b)); }
+  T diff(int a, int b) { return mul(inv(weight(b)), weight(a)); }
 
   bool get(int a, int b, T &out) {
     if (!same(a, b)) return false;
@@ -50,15 +50,15 @@ struct weighted_unionfind {
     int rb = leader(b);
     T wa = w[a];
     T wb = w[b];
-    if (ra == rb) return sub(wa, wb) == x;
+    if (ra == rb) return mul(inv(wb), wa) == x;
     if (sz[ra] < sz[rb]) {
       p[ra] = rb;
       sz[rb] += sz[ra];
-      w[ra] = sub(add(wb, x), wa);
+      w[ra] = mul(mul(wb, x), inv(wa));
     } else {
       p[rb] = ra;
       sz[ra] += sz[rb];
-      w[rb] = sub(sub(wa, wb), x);
+      w[rb] = mul(mul(wa, inv(x)), inv(wb));
     }
     return true;
   }

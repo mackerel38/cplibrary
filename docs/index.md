@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: math
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: math/matrix.hpp
+      title: "2x2 \u884C\u5217"
   - name: structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -51,5 +56,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_unionfind_with_potential.test.cpp
       title: verify/yosupo_unionfind_with_potential.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
+      title: verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
 layout: toppage
 ---
