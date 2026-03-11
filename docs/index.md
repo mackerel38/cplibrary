@@ -38,6 +38,9 @@ data:
       path: structure/bipq.hpp
       title: "\u4E21\u7AEF\u512A\u5148\u5EA6\u4ED8\u304D\u30AD\u30E5\u30FC"
     - icon: ':heavy_check_mark:'
+      path: structure/dynamiclazysegtree.hpp
+      title: "\u52D5\u7684\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':heavy_check_mark:'
       path: structure/dynamicsegtree.hpp
       title: Dynamic Segment Tree
     - icon: ':heavy_check_mark:'
@@ -97,6 +100,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_affine_range_sum.test.cpp
       title: verify/yosupo_range_affine_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_range_affine_range_sum_large_array.test.cpp
+      title: verify/yosupo_range_affine_range_sum_large_array.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_range_parallel_unionfind.test.cpp
       title: verify/yosupo_range_parallel_unionfind.test.cpp

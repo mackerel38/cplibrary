@@ -19,6 +19,9 @@ data:
     path: verify/yosupo_range_affine_range_sum.test.cpp
     title: verify/yosupo_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/yosupo_range_affine_range_sum_large_array.test.cpp
+    title: verify/yosupo_range_affine_range_sum_large_array.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_range_parallel_unionfind.test.cpp
     title: verify/yosupo_range_parallel_unionfind.test.cpp
   - icon: ':heavy_check_mark:'
@@ -87,6 +90,7 @@ data:
   - verify/yosupo_unionfind_with_potential.test.cpp
   - verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
   - verify/yosupo_range_affine_point_get.test.cpp
+  - verify/yosupo_range_affine_range_sum_large_array.test.cpp
   - verify/yosupo_range_affine_range_sum.test.cpp
 documentation_of: //math/modint.hpp
 layout: document
