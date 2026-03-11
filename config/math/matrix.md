@@ -1,6 +1,6 @@
 ---
 title: 2x2 行列
-documentation_of: math/matrix.hpp
+documentation_of: //math/matrix.hpp
 ---
 
 Definition

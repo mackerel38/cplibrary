@@ -1,6 +1,6 @@
 ---
 title: 重み付き Union-Find
-documentation_of: structure/weightedunionfind.hpp
+documentation_of: //structure/weightedunionfind.hpp
 ---
 
 Definition

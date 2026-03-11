@@ -40,11 +40,11 @@ data:
     \    long long v = a + b;\n    if (v >= MOD) v -= MOD;\n    return v;\n  }\n \
     \ static long long inv(long long a) { return a == 0 ? 0 : MOD - a; }\n};\n\nint\
     \ main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int N, Q;\n\
-    \  if (!(cin >> N >> Q)) return 0;\n  weighted_unionfind<long long, mod_add> uf(N);\n\
-    \  for (int i = 0; i < Q; i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n\
-    \      int u, v;\n      long long x;\n      cin >> u >> v >> x;\n      x %= MOD;\n\
-    \      cout << (uf.merge(u, v, x) ? 1 : 0) << \"\\n\";\n    } else {\n      int\
-    \ u, v;\n      cin >> u >> v;\n      long long ans;\n      if (uf.get(u, v, ans))\
+    \  cin >> N >> Q;\n  weighted_unionfind<long long, mod_add> uf(N);\n  for (int\
+    \ i = 0; i < Q; i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int\
+    \ u, v;\n      long long x;\n      cin >> u >> v >> x;\n      x %= MOD;\n    \
+    \  cout << (uf.merge(u, v, x) ? 1 : 0) << \"\\n\";\n    } else {\n      int u,\
+    \ v;\n      cin >> u >> v;\n      long long ans;\n      if (uf.get(u, v, ans))\
     \ {\n        cout << ans << \"\\n\";\n      } else {\n        cout << -1 << \"\
     \\n\";\n      }\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind_with_potential\"\
@@ -53,7 +53,7 @@ data:
     \ long long op(long long a, long long b) {\n    long long v = a + b;\n    if (v\
     \ >= MOD) v -= MOD;\n    return v;\n  }\n  static long long inv(long long a) {\
     \ return a == 0 ? 0 : MOD - a; }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n\
-    \  cin.tie(nullptr);\n  int N, Q;\n  if (!(cin >> N >> Q)) return 0;\n  weighted_unionfind<long\
+    \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  weighted_unionfind<long\
     \ long, mod_add> uf(N);\n  for (int i = 0; i < Q; i++) {\n    int t;\n    cin\
     \ >> t;\n    if (t == 0) {\n      int u, v;\n      long long x;\n      cin >>\
     \ u >> v >> x;\n      x %= MOD;\n      cout << (uf.merge(u, v, x) ? 1 : 0) <<\
@@ -66,7 +66,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo_unionfind_with_potential.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 16:11:22+09:00'
+  timestamp: '2026-03-11 16:14:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_unionfind_with_potential.test.cpp

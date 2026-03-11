@@ -61,7 +61,7 @@ data:
     \ mat_group {\n  static mat id() { return mat::id(); }\n  static mat op(const\
     \ mat &a, const mat &b) { return mat::op(a, b); }\n  static mat inv(const mat\
     \ &a) { return mat::inv(a); }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n\
-    \  cin.tie(nullptr);\n  int N, Q;\n  if (!(cin >> N >> Q)) return 0;\n  weighted_unionfind<mat,\
+    \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  weighted_unionfind<mat,\
     \ mat_group> uf(N);\n  for (int i = 0; i < Q; i++) {\n    int t;\n    cin >> t;\n\
     \    if (t == 0) {\n      int u, v;\n      long long x00, x01, x10, x11;\n   \
     \   cin >> u >> v >> x00 >> x01 >> x10 >> x11;\n      mat x(x00, x01, x10, x11);\n\
@@ -76,7 +76,7 @@ data:
     \ mat_group {\n  static mat id() { return mat::id(); }\n  static mat op(const\
     \ mat &a, const mat &b) { return mat::op(a, b); }\n  static mat inv(const mat\
     \ &a) { return mat::inv(a); }\n};\n\nint main() {\n  ios::sync_with_stdio(false);\n\
-    \  cin.tie(nullptr);\n  int N, Q;\n  if (!(cin >> N >> Q)) return 0;\n  weighted_unionfind<mat,\
+    \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  weighted_unionfind<mat,\
     \ mat_group> uf(N);\n  for (int i = 0; i < Q; i++) {\n    int t;\n    cin >> t;\n\
     \    if (t == 0) {\n      int u, v;\n      long long x00, x01, x10, x11;\n   \
     \   cin >> u >> v >> x00 >> x01 >> x10 >> x11;\n      mat x(x00, x01, x10, x11);\n\
@@ -91,7 +91,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp
   requiredBy: []
-  timestamp: '2026-03-11 16:11:39+09:00'
+  timestamp: '2026-03-11 16:14:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_unionfind_with_potential_non_commutative_group.test.cpp

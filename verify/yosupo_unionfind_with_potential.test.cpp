@@ -17,7 +17,7 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int N, Q;
-  if (!(cin >> N >> Q)) return 0;
+  cin >> N >> Q;
   weighted_unionfind<long long, mod_add> uf(N);
   for (int i = 0; i < Q; i++) {
     int t;

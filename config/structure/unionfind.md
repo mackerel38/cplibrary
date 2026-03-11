@@ -1,6 +1,6 @@
 ---
 title: Union-Find
-documentation_of: structure/unionfind.hpp
+documentation_of: //structure/unionfind.hpp
 ---
 
 Definition
