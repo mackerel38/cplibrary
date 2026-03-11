@@ -18,6 +18,9 @@ data:
       path: structure/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
     - icon: ':heavy_check_mark:'
+      path: structure/rangeparallel_unionfind.hpp
+      title: Range Parallel Union-Find
+    - icon: ':heavy_check_mark:'
       path: structure/segtree.hpp
       title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
@@ -47,6 +50,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_predecessor_problem.test.cpp
       title: verify/yosupo_predecessor_problem.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_range_parallel_unionfind.test.cpp
+      title: verify/yosupo_range_parallel_unionfind.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_static_range_sum.test.cpp
       title: verify/yosupo_static_range_sum.test.cpp
