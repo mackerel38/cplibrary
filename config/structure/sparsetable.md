@@ -1,5 +1,5 @@
 ---
-title: Sparse Table RMQ
+title: Sparse Table
 documentation_of: //structure/sparsetable.hpp
 ---
 

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: structure/sparsetable.hpp
-    title: Sparse Table RMQ
+    title: Sparse Table
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

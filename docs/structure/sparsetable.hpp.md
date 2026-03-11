@@ -51,7 +51,7 @@ data:
   - verify/yosupo_staticrmq.test.cpp
 documentation_of: //structure/sparsetable.hpp
 layout: document
-title: Sparse Table RMQ
+title: Sparse Table
 ---
 
 Definition

@@ -45,7 +45,7 @@ data:
       title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: structure/sparsetable.hpp
-      title: Sparse Table RMQ
+      title: Sparse Table
     - icon: ':heavy_check_mark:'
       path: structure/treap.hpp
       title: Treap
