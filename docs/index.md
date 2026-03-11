@@ -38,6 +38,9 @@ data:
       path: structure/bipq.hpp
       title: "\u4E21\u7AEF\u512A\u5148\u5EA6\u4ED8\u304D\u30AD\u30E5\u30FC"
     - icon: ':heavy_check_mark:'
+      path: structure/dynamicsegtree.hpp
+      title: Dynamic Segment Tree
+    - icon: ':heavy_check_mark:'
       path: structure/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7"
     - icon: ':heavy_check_mark:'
@@ -76,6 +79,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_point_set_range_composite.test.cpp
       title: verify/yosupo_point_set_range_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yosupo_point_set_range_composite_large_array.test.cpp
+      title: verify/yosupo_point_set_range_composite_large_array.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo_predecessor_problem.test.cpp
       title: verify/yosupo_predecessor_problem.test.cpp

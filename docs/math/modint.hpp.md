@@ -7,6 +7,9 @@ data:
     path: verify/yosupo_point_set_range_composite.test.cpp
     title: verify/yosupo_point_set_range_composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/yosupo_point_set_range_composite_large_array.test.cpp
+    title: verify/yosupo_point_set_range_composite_large_array.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo_range_parallel_unionfind.test.cpp
     title: verify/yosupo_range_parallel_unionfind.test.cpp
   - icon: ':heavy_check_mark:'
@@ -68,6 +71,7 @@ data:
   timestamp: '2026-03-11 16:50:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/yosupo_point_set_range_composite_large_array.test.cpp
   - verify/yosupo_range_parallel_unionfind.test.cpp
   - verify/yosupo_point_set_range_composite.test.cpp
   - verify/yosupo_unionfind_with_potential.test.cpp
