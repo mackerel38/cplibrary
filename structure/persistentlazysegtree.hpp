@@ -47,6 +47,12 @@ struct persistent_lazysegtree {
     return (int)root.size() - 1;
   }
 
+  int replace_range(int ver_a, int ver_b, int l, int r) {
+    int nr = replace_range(root[ver_a], root[ver_b], 0, n, l, r);
+    root.push_back(nr);
+    return (int)root.size() - 1;
+  }
+
   S get(int ver, int p) { return prod(ver, p, p + 1); }
 
   S prod(int ver, int l, int r) { return prod(root[ver], 0, n, l, r, id()); }
@@ -148,5 +154,21 @@ struct persistent_lazysegtree {
     S lv = prod(nd[v].l, l, m, ql, qr, nxt);
     S rv = prod(nd[v].r, m, r, ql, qr, nxt);
     return op(lv, rv);
+  }
+
+  int replace_range(int a, int b, int l, int r, int ql, int qr) {
+    if (qr <= l || r <= ql) return a;
+    if (ql <= l && r <= qr) return b;
+    a = clone(a);
+    b = clone(b);
+    push(a, l, r);
+    push(b, l, r);
+    int m = (l + r) >> 1;
+    int lc = replace_range(nd[a].l, nd[b].l, l, m, ql, qr);
+    int rc = replace_range(nd[a].r, nd[b].r, m, r, ql, qr);
+    nd[a].l = lc;
+    nd[a].r = rc;
+    nd[a].val = op(nd[lc].val, nd[rc].val);
+    return a;
   }
 };

@@ -7,6 +7,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/modint.hpp
     title: modint
+  - icon: ':heavy_check_mark:'
+    path: structure/persistentlazysegtree.hpp
+    title: "\u6C38\u7D9A\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,11 +22,67 @@ data:
     - https://judge.yosupo.jp/problem/persistent_range_affine_range_sum
   bundledCode: "#line 1 \"verify/yosupo_persistent_range_affine_range_sum.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_range_affine_range_sum\"\
-    \n#line 2 \"math/affine.hpp\"\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    \ntemplate <class T>\nstruct affine {\n  T a, b;\n  affine() : a(1), b(0) {}\n\
-    \  affine(T a_, T b_) : a(a_), b(b_) {}\n  T eval(T x) const { return a * x +\
-    \ b; }\n};\n\ntemplate <class T>\ninline affine<T> affine_add(const affine<T>&\
-    \ f, const affine<T>& g) {\n  return affine<T>(f.a + g.a, f.b + g.b);\n}\n\ntemplate\
+    \n#line 2 \"structure/persistentlazysegtree.hpp\"\n#include <bits/stdc++.h>\n\
+    using namespace std;\n\ntemplate <class S, S (*op)(S, S), S (*e)(), class F, S\
+    \ (*mapping)(F, S),\n          F (*composition)(F, F), F (*id)()>\nstruct persistent_lazysegtree\
+    \ {\n  struct node {\n    S val;\n    F lz;\n    int l;\n    int r;\n    bool\
+    \ has;\n  };\n\n  int n;\n  vector<node> nd;\n  vector<int> root;\n\n  persistent_lazysegtree()\
+    \ : n(0) {}\n  persistent_lazysegtree(int n_) { init(n_); }\n  persistent_lazysegtree(const\
+    \ vector<S>& v) { build(v); }\n\n  void init(int n_) {\n    n = n_;\n    nd.clear();\n\
+    \    root.clear();\n    root.push_back(build_empty(0, n));\n  }\n\n  void build(const\
+    \ vector<S>& v) {\n    n = (int)v.size();\n    nd.clear();\n    root.clear();\n\
+    \    root.push_back(build_vec(0, n, v));\n  }\n\n  int apply(int ver, int l, int\
+    \ r, F f) {\n    int nr = apply(root[ver], 0, n, l, r, f);\n    root.push_back(nr);\n\
+    \    return (int)root.size() - 1;\n  }\n\n  int set(int ver, int p, S x) {\n \
+    \   int nr = set(root[ver], 0, n, p, x);\n    root.push_back(nr);\n    return\
+    \ (int)root.size() - 1;\n  }\n\n  int replace_range(int ver_a, int ver_b, int\
+    \ l, int r) {\n    int nr = replace_range(root[ver_a], root[ver_b], 0, n, l, r);\n\
+    \    root.push_back(nr);\n    return (int)root.size() - 1;\n  }\n\n  S get(int\
+    \ ver, int p) { return prod(ver, p, p + 1); }\n\n  S prod(int ver, int l, int\
+    \ r) { return prod(root[ver], 0, n, l, r, id()); }\n\n  int new_node(S val, F\
+    \ lz, int l, int r, bool has) {\n    nd.push_back({val, lz, l, r, has});\n   \
+    \ return (int)nd.size() - 1;\n  }\n\n  int build_empty(int l, int r) {\n    if\
+    \ (r - l == 1) return new_node(e(), id(), -1, -1, false);\n    int m = (l + r)\
+    \ >> 1;\n    int lc = build_empty(l, m);\n    int rc = build_empty(m, r);\n  \
+    \  return new_node(op(nd[lc].val, nd[rc].val), id(), lc, rc, false);\n  }\n\n\
+    \  int build_vec(int l, int r, const vector<S>& v) {\n    if (r - l == 1) return\
+    \ new_node(v[l], id(), -1, -1, false);\n    int m = (l + r) >> 1;\n    int lc\
+    \ = build_vec(l, m, v);\n    int rc = build_vec(m, r, v);\n    return new_node(op(nd[lc].val,\
+    \ nd[rc].val), id(), lc, rc, false);\n  }\n\n  int clone(int v) {\n    nd.push_back(nd[v]);\n\
+    \    return (int)nd.size() - 1;\n  }\n\n  void all_apply(int v, F f) {\n    nd[v].val\
+    \ = mapping(f, nd[v].val);\n    if (nd[v].has) {\n      nd[v].lz = composition(f,\
+    \ nd[v].lz);\n    } else {\n      nd[v].lz = f;\n      nd[v].has = true;\n   \
+    \ }\n  }\n\n  void push(int v, int l, int r) {\n    if (r - l == 1) return;\n\
+    \    if (!nd[v].has) return;\n    F f = nd[v].lz;\n    int lc = nd[v].l;\n   \
+    \ int rc = nd[v].r;\n    lc = clone(lc);\n    rc = clone(rc);\n    all_apply(lc,\
+    \ f);\n    all_apply(rc, f);\n    nd[v].l = lc;\n    nd[v].r = rc;\n    nd[v].lz\
+    \ = id();\n    nd[v].has = false;\n  }\n\n  int apply(int v, int l, int r, int\
+    \ ql, int qr, F f) {\n    if (qr <= l || r <= ql) return v;\n    v = clone(v);\n\
+    \    if (ql <= l && r <= qr) {\n      all_apply(v, f);\n      return v;\n    }\n\
+    \    push(v, l, r);\n    int m = (l + r) >> 1;\n    int lc = apply(nd[v].l, l,\
+    \ m, ql, qr, f);\n    int rc = apply(nd[v].r, m, r, ql, qr, f);\n    nd[v].l =\
+    \ lc;\n    nd[v].r = rc;\n    nd[v].val = op(nd[lc].val, nd[rc].val);\n    return\
+    \ v;\n  }\n\n  int set(int v, int l, int r, int p, S x) {\n    v = clone(v);\n\
+    \    if (r - l == 1) {\n      nd[v].val = x;\n      nd[v].lz = id();\n      nd[v].has\
+    \ = false;\n      return v;\n    }\n    push(v, l, r);\n    int m = (l + r) >>\
+    \ 1;\n    if (p < m) {\n      nd[v].l = set(nd[v].l, l, m, p, x);\n    } else\
+    \ {\n      nd[v].r = set(nd[v].r, m, r, p, x);\n    }\n    nd[v].val = op(nd[nd[v].l].val,\
+    \ nd[nd[v].r].val);\n    return v;\n  }\n\n  S prod(int v, int l, int r, int ql,\
+    \ int qr, F acc) {\n    if (qr <= l || r <= ql) return e();\n    if (ql <= l &&\
+    \ r <= qr) return mapping(acc, nd[v].val);\n    int m = (l + r) >> 1;\n    F nxt\
+    \ = acc;\n    if (nd[v].has) nxt = composition(acc, nd[v].lz);\n    S lv = prod(nd[v].l,\
+    \ l, m, ql, qr, nxt);\n    S rv = prod(nd[v].r, m, r, ql, qr, nxt);\n    return\
+    \ op(lv, rv);\n  }\n\n  int replace_range(int a, int b, int l, int r, int ql,\
+    \ int qr) {\n    if (qr <= l || r <= ql) return a;\n    if (ql <= l && r <= qr)\
+    \ return b;\n    a = clone(a);\n    b = clone(b);\n    push(a, l, r);\n    push(b,\
+    \ l, r);\n    int m = (l + r) >> 1;\n    int lc = replace_range(nd[a].l, nd[b].l,\
+    \ l, m, ql, qr);\n    int rc = replace_range(nd[a].r, nd[b].r, m, r, ql, qr);\n\
+    \    nd[a].l = lc;\n    nd[a].r = rc;\n    nd[a].val = op(nd[lc].val, nd[rc].val);\n\
+    \    return a;\n  }\n};\n#line 3 \"math/affine.hpp\"\nusing namespace std;\n\n\
+    template <class T>\nstruct affine {\n  T a, b;\n  affine() : a(1), b(0) {}\n \
+    \ affine(T a_, T b_) : a(a_), b(b_) {}\n  T eval(T x) const { return a * x + b;\
+    \ }\n};\n\ntemplate <class T>\ninline affine<T> affine_add(const affine<T>& f,\
+    \ const affine<T>& g) {\n  return affine<T>(f.a + g.a, f.b + g.b);\n}\n\ntemplate\
     \ <class T>\ninline affine<T> affine_compose(const affine<T>& f, const affine<T>&\
     \ g) {\n  return affine<T>(f.a * g.a, f.a * g.b + f.b);\n}\n#line 3 \"math/modint.hpp\"\
     \nusing namespace std;\n\ntemplate <long long MOD>\nstruct modint {\n  long long\
@@ -45,116 +104,54 @@ data:
     \ - 2); }\n\n  friend ostream& operator<<(ostream& os, const modint& x) {\n  \
     \  return os << x.v;\n  }\n  friend istream& operator>>(istream& is, modint& x)\
     \ {\n    long long t;\n    is >> t;\n    x = modint(t);\n    return is;\n  }\n\
-    };\n#line 5 \"verify/yosupo_persistent_range_affine_range_sum.test.cpp\"\nusing\
+    };\n#line 6 \"verify/yosupo_persistent_range_affine_range_sum.test.cpp\"\nusing\
     \ namespace std;\n\nusing mint = modint<998244353>;\nusing F = affine<mint>;\n\
-    \nstruct node {\n  mint sum;\n  int l;\n  int r;\n  F lz;\n  bool has;\n};\n\n\
-    struct pst {\n  int n;\n  vector<node> nd;\n  vector<int> root;\n\n  pst() : n(0)\
-    \ {}\n  pst(const vector<mint>& a) { build(a); }\n\n  int new_node(mint sum, int\
-    \ l, int r, F lz, bool has) {\n    nd.push_back({sum, l, r, lz, has});\n    return\
-    \ (int)nd.size() - 1;\n  }\n\n  int build_vec(int l, int r, const vector<mint>&\
-    \ a) {\n    if (r - l == 1) return new_node(a[l], -1, -1, F(), false);\n    int\
-    \ m = (l + r) >> 1;\n    int lc = build_vec(l, m, a);\n    int rc = build_vec(m,\
-    \ r, a);\n    return new_node(nd[lc].sum + nd[rc].sum, lc, rc, F(), false);\n\
-    \  }\n\n  void build(const vector<mint>& a) {\n    n = (int)a.size();\n    nd.clear();\n\
-    \    root.clear();\n    root.push_back(build_vec(0, n, a));\n  }\n\n  int clone(int\
-    \ v) {\n    nd.push_back(nd[v]);\n    return (int)nd.size() - 1;\n  }\n\n  void\
-    \ all_apply(int v, F f, int len) {\n    nd[v].sum = f.a * nd[v].sum + f.b * mint(len);\n\
-    \    if (nd[v].has) {\n      nd[v].lz = affine_compose(f, nd[v].lz);\n    } else\
-    \ {\n      nd[v].lz = f;\n      nd[v].has = true;\n    }\n  }\n\n  void push(int\
-    \ v, int l, int r) {\n    if (!nd[v].has || r - l == 1) return;\n    int m = (l\
-    \ + r) >> 1;\n    int lc = clone(nd[v].l);\n    int rc = clone(nd[v].r);\n   \
-    \ all_apply(lc, nd[v].lz, m - l);\n    all_apply(rc, nd[v].lz, r - m);\n    nd[v].l\
-    \ = lc;\n    nd[v].r = rc;\n    nd[v].lz = F();\n    nd[v].has = false;\n  }\n\
-    \n  int apply(int v, int l, int r, int ql, int qr, F f) {\n    if (qr <= l ||\
-    \ r <= ql) return v;\n    v = clone(v);\n    if (ql <= l && r <= qr) {\n     \
-    \ all_apply(v, f, r - l);\n      return v;\n    }\n    push(v, l, r);\n    int\
-    \ m = (l + r) >> 1;\n    int lc = apply(nd[v].l, l, m, ql, qr, f);\n    int rc\
-    \ = apply(nd[v].r, m, r, ql, qr, f);\n    nd[v].l = lc;\n    nd[v].r = rc;\n \
-    \   nd[v].sum = nd[lc].sum + nd[rc].sum;\n    return v;\n  }\n\n  mint prod(int\
-    \ v, int l, int r, int ql, int qr, F acc) {\n    if (qr <= l || r <= ql) return\
-    \ mint(0);\n    if (ql <= l && r <= qr) return acc.a * nd[v].sum + acc.b * mint(r\
-    \ - l);\n    int m = (l + r) >> 1;\n    F nxt = acc;\n    if (nd[v].has) nxt =\
-    \ affine_compose(acc, nd[v].lz);\n    mint lv = prod(nd[v].l, l, m, ql, qr, nxt);\n\
-    \    mint rv = prod(nd[v].r, m, r, ql, qr, nxt);\n    return lv + rv;\n  }\n\n\
-    \  int replace_range(int a, int b, int l, int r, int ql, int qr) {\n    if (qr\
-    \ <= l || r <= ql) return a;\n    if (ql <= l && r <= qr) return b;\n    a = clone(a);\n\
-    \    b = clone(b);\n    push(a, l, r);\n    push(b, l, r);\n    int m = (l + r)\
-    \ >> 1;\n    int lc = replace_range(nd[a].l, nd[b].l, l, m, ql, qr);\n    int\
-    \ rc = replace_range(nd[a].r, nd[b].r, m, r, ql, qr);\n    nd[a].l = lc;\n   \
-    \ nd[a].r = rc;\n    nd[a].sum = nd[lc].sum + nd[rc].sum;\n    return a;\n  }\n\
-    };\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int\
-    \ N, Q;\n  cin >> N >> Q;\n  vector<mint> a(N);\n  for (int i = 0; i < N; i++)\
-    \ cin >> a[i];\n  pst seg(a);\n  vector<int> ver(Q, -1);\n  for (int i = 0; i\
-    \ < Q; i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int k, l, r;\n\
-    \      long long b, c;\n      cin >> k >> l >> r >> b >> c;\n      int base =\
-    \ (k == -1) ? seg.root[0] : ver[k];\n      int nr = seg.apply(base, 0, seg.n,\
-    \ l, r, F(mint(b), mint(c)));\n      ver[i] = nr;\n    } else if (t == 1) {\n\
-    \      int k, s, l, r;\n      cin >> k >> s >> l >> r;\n      int base = (k ==\
-    \ -1) ? seg.root[0] : ver[k];\n      int src = (s == -1) ? seg.root[0] : ver[s];\n\
-    \      int nr = seg.replace_range(base, src, 0, seg.n, l, r);\n      ver[i] =\
-    \ nr;\n    } else {\n      int k, l, r;\n      cin >> k >> l >> r;\n      int\
-    \ base = (k == -1) ? seg.root[0] : ver[k];\n      mint ans = seg.prod(base, 0,\
-    \ seg.n, l, r, F());\n      cout << ans.v << \"\\n\";\n    }\n  }\n  return 0;\n\
-    }\n"
+    \nstruct S {\n  mint sum;\n  int len;\n};\n\nS op(S a, S b) { return {a.sum +\
+    \ b.sum, a.len + b.len}; }\nS e() { return {mint(0), 0}; }\nS mapping(F f, S x)\
+    \ { return {f.a * x.sum + f.b * mint(x.len), x.len}; }\nF composition(F f, F g)\
+    \ { return affine_compose(f, g); }\nF id() { return F(); }\n\nusing seg_t = persistent_lazysegtree<S,\
+    \ op, e, F, mapping, composition, id>;\n\nint main() {\n  ios::sync_with_stdio(false);\n\
+    \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  vector<S> v(N);\n  for\
+    \ (int i = 0; i < N; i++) {\n    mint x;\n    cin >> x;\n    v[i] = {x, 1};\n\
+    \  }\n  seg_t seg(v);\n  vector<int> ver(Q, -1);\n  for (int i = 0; i < Q; i++)\
+    \ {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int k, l, r;\n      long\
+    \ long b, c;\n      cin >> k >> l >> r >> b >> c;\n      int base = (k == -1)\
+    \ ? 0 : ver[k];\n      ver[i] = seg.apply(base, l, r, F(mint(b), mint(c)));\n\
+    \    } else if (t == 1) {\n      int k, s, l, r;\n      cin >> k >> s >> l >>\
+    \ r;\n      int base = (k == -1) ? 0 : ver[k];\n      int src = (s == -1) ? 0\
+    \ : ver[s];\n      ver[i] = seg.replace_range(base, src, l, r);\n    } else {\n\
+    \      int k, l, r;\n      cin >> k >> l >> r;\n      int base = (k == -1) ? 0\
+    \ : ver[k];\n      mint ans = seg.prod(base, l, r).sum;\n      cout << ans.v <<\
+    \ \"\\n\";\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_range_affine_range_sum\"\
-    \n#include \"math/affine.hpp\"\n#include \"math/modint.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\nusing mint = modint<998244353>;\nusing F = affine<mint>;\n\
-    \nstruct node {\n  mint sum;\n  int l;\n  int r;\n  F lz;\n  bool has;\n};\n\n\
-    struct pst {\n  int n;\n  vector<node> nd;\n  vector<int> root;\n\n  pst() : n(0)\
-    \ {}\n  pst(const vector<mint>& a) { build(a); }\n\n  int new_node(mint sum, int\
-    \ l, int r, F lz, bool has) {\n    nd.push_back({sum, l, r, lz, has});\n    return\
-    \ (int)nd.size() - 1;\n  }\n\n  int build_vec(int l, int r, const vector<mint>&\
-    \ a) {\n    if (r - l == 1) return new_node(a[l], -1, -1, F(), false);\n    int\
-    \ m = (l + r) >> 1;\n    int lc = build_vec(l, m, a);\n    int rc = build_vec(m,\
-    \ r, a);\n    return new_node(nd[lc].sum + nd[rc].sum, lc, rc, F(), false);\n\
-    \  }\n\n  void build(const vector<mint>& a) {\n    n = (int)a.size();\n    nd.clear();\n\
-    \    root.clear();\n    root.push_back(build_vec(0, n, a));\n  }\n\n  int clone(int\
-    \ v) {\n    nd.push_back(nd[v]);\n    return (int)nd.size() - 1;\n  }\n\n  void\
-    \ all_apply(int v, F f, int len) {\n    nd[v].sum = f.a * nd[v].sum + f.b * mint(len);\n\
-    \    if (nd[v].has) {\n      nd[v].lz = affine_compose(f, nd[v].lz);\n    } else\
-    \ {\n      nd[v].lz = f;\n      nd[v].has = true;\n    }\n  }\n\n  void push(int\
-    \ v, int l, int r) {\n    if (!nd[v].has || r - l == 1) return;\n    int m = (l\
-    \ + r) >> 1;\n    int lc = clone(nd[v].l);\n    int rc = clone(nd[v].r);\n   \
-    \ all_apply(lc, nd[v].lz, m - l);\n    all_apply(rc, nd[v].lz, r - m);\n    nd[v].l\
-    \ = lc;\n    nd[v].r = rc;\n    nd[v].lz = F();\n    nd[v].has = false;\n  }\n\
-    \n  int apply(int v, int l, int r, int ql, int qr, F f) {\n    if (qr <= l ||\
-    \ r <= ql) return v;\n    v = clone(v);\n    if (ql <= l && r <= qr) {\n     \
-    \ all_apply(v, f, r - l);\n      return v;\n    }\n    push(v, l, r);\n    int\
-    \ m = (l + r) >> 1;\n    int lc = apply(nd[v].l, l, m, ql, qr, f);\n    int rc\
-    \ = apply(nd[v].r, m, r, ql, qr, f);\n    nd[v].l = lc;\n    nd[v].r = rc;\n \
-    \   nd[v].sum = nd[lc].sum + nd[rc].sum;\n    return v;\n  }\n\n  mint prod(int\
-    \ v, int l, int r, int ql, int qr, F acc) {\n    if (qr <= l || r <= ql) return\
-    \ mint(0);\n    if (ql <= l && r <= qr) return acc.a * nd[v].sum + acc.b * mint(r\
-    \ - l);\n    int m = (l + r) >> 1;\n    F nxt = acc;\n    if (nd[v].has) nxt =\
-    \ affine_compose(acc, nd[v].lz);\n    mint lv = prod(nd[v].l, l, m, ql, qr, nxt);\n\
-    \    mint rv = prod(nd[v].r, m, r, ql, qr, nxt);\n    return lv + rv;\n  }\n\n\
-    \  int replace_range(int a, int b, int l, int r, int ql, int qr) {\n    if (qr\
-    \ <= l || r <= ql) return a;\n    if (ql <= l && r <= qr) return b;\n    a = clone(a);\n\
-    \    b = clone(b);\n    push(a, l, r);\n    push(b, l, r);\n    int m = (l + r)\
-    \ >> 1;\n    int lc = replace_range(nd[a].l, nd[b].l, l, m, ql, qr);\n    int\
-    \ rc = replace_range(nd[a].r, nd[b].r, m, r, ql, qr);\n    nd[a].l = lc;\n   \
-    \ nd[a].r = rc;\n    nd[a].sum = nd[lc].sum + nd[rc].sum;\n    return a;\n  }\n\
-    };\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int\
-    \ N, Q;\n  cin >> N >> Q;\n  vector<mint> a(N);\n  for (int i = 0; i < N; i++)\
-    \ cin >> a[i];\n  pst seg(a);\n  vector<int> ver(Q, -1);\n  for (int i = 0; i\
-    \ < Q; i++) {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int k, l, r;\n\
-    \      long long b, c;\n      cin >> k >> l >> r >> b >> c;\n      int base =\
-    \ (k == -1) ? seg.root[0] : ver[k];\n      int nr = seg.apply(base, 0, seg.n,\
-    \ l, r, F(mint(b), mint(c)));\n      ver[i] = nr;\n    } else if (t == 1) {\n\
-    \      int k, s, l, r;\n      cin >> k >> s >> l >> r;\n      int base = (k ==\
-    \ -1) ? seg.root[0] : ver[k];\n      int src = (s == -1) ? seg.root[0] : ver[s];\n\
-    \      int nr = seg.replace_range(base, src, 0, seg.n, l, r);\n      ver[i] =\
-    \ nr;\n    } else {\n      int k, l, r;\n      cin >> k >> l >> r;\n      int\
-    \ base = (k == -1) ? seg.root[0] : ver[k];\n      mint ans = seg.prod(base, 0,\
-    \ seg.n, l, r, F());\n      cout << ans.v << \"\\n\";\n    }\n  }\n  return 0;\n\
-    }\n"
+    \n#include \"structure/persistentlazysegtree.hpp\"\n#include \"math/affine.hpp\"\
+    \n#include \"math/modint.hpp\"\n#include <bits/stdc++.h>\nusing namespace std;\n\
+    \nusing mint = modint<998244353>;\nusing F = affine<mint>;\n\nstruct S {\n  mint\
+    \ sum;\n  int len;\n};\n\nS op(S a, S b) { return {a.sum + b.sum, a.len + b.len};\
+    \ }\nS e() { return {mint(0), 0}; }\nS mapping(F f, S x) { return {f.a * x.sum\
+    \ + f.b * mint(x.len), x.len}; }\nF composition(F f, F g) { return affine_compose(f,\
+    \ g); }\nF id() { return F(); }\n\nusing seg_t = persistent_lazysegtree<S, op,\
+    \ e, F, mapping, composition, id>;\n\nint main() {\n  ios::sync_with_stdio(false);\n\
+    \  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  vector<S> v(N);\n  for\
+    \ (int i = 0; i < N; i++) {\n    mint x;\n    cin >> x;\n    v[i] = {x, 1};\n\
+    \  }\n  seg_t seg(v);\n  vector<int> ver(Q, -1);\n  for (int i = 0; i < Q; i++)\
+    \ {\n    int t;\n    cin >> t;\n    if (t == 0) {\n      int k, l, r;\n      long\
+    \ long b, c;\n      cin >> k >> l >> r >> b >> c;\n      int base = (k == -1)\
+    \ ? 0 : ver[k];\n      ver[i] = seg.apply(base, l, r, F(mint(b), mint(c)));\n\
+    \    } else if (t == 1) {\n      int k, s, l, r;\n      cin >> k >> s >> l >>\
+    \ r;\n      int base = (k == -1) ? 0 : ver[k];\n      int src = (s == -1) ? 0\
+    \ : ver[s];\n      ver[i] = seg.replace_range(base, src, l, r);\n    } else {\n\
+    \      int k, l, r;\n      cin >> k >> l >> r;\n      int base = (k == -1) ? 0\
+    \ : ver[k];\n      mint ans = seg.prod(base, l, r).sum;\n      cout << ans.v <<\
+    \ \"\\n\";\n    }\n  }\n  return 0;\n}\n"
   dependsOn:
+  - structure/persistentlazysegtree.hpp
   - math/affine.hpp
   - math/modint.hpp
   isVerificationFile: true
   path: verify/yosupo_persistent_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-03-12 00:02:38+09:00'
+  timestamp: '2026-03-12 00:17:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: //verify/yosupo_persistent_range_affine_range_sum.test.cpp
