@@ -1,6 +1,6 @@
 ---
 title: Range Affine Range Sum
-documentation_of: structure/range_affine_range_sum.hpp
+documentation_of: //structure/range_affine_range_sum.hpp
 ---
 
 Definition
